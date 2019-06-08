@@ -1,0 +1,19 @@
+{
+  "name": "react-native-navigation-hooks",
+  "version": "2.21.0",
+  "author": "Juan Pablo Garcia Dalolla <juanpablo@underscope.io>",
+  "bugs": {
+    "email": "juanpablo@underscope.io",
+    "url": "https://github.com/underscopeio/react-native-navigation-hooks"
+  },
+  "description": "A set of React hooks for React Native Navigation.",
+  "homepage": "https://github.com/underscopeio/react-native-navigation-hooks#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "github:underscopeio/react-native-navigation-hooks",
+  "peerDependencies": {
+    "react": ">=16.8.3",
+    "react-native": ">=0.59.0",
+    "react-native-navigation": ">=2.21.0"
+  }
+}
