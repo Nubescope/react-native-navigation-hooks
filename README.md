@@ -1,4 +1,4 @@
-# React Native Navigation Hooks [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=React%20Native%20Navigation%20Hooks!&url=https://github.com/underscopeio/react-native-navigation-hooks&via=underscopeio&hashtags=react,reactjs,reactnative,javascript,hooks,react-native-navigation)
+# React Native Navigation Hooks [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=React%20Native%20Navigation%20Hooks!&url=https://github.com/underscopeio/react-native-navigation-hooks&via=underscopeio&hashtags=react,reactjs,reactnative,javascript,hooks,reactnativenavigation)
 
 A set of React hooks for React Native Navigation
 
