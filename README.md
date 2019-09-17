@@ -6,12 +6,12 @@ A set of React hooks for React Native Navigation
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/react-native-navigation-hooks.svg)](https://www.npmjs.com/package/react-native-navigation-hooks)
 [![downloads](https://img.shields.io/npm/dt/react-native-navigation-hooks.svg)](https://www.npmjs.com/package/react-native-navigation-hooks)
 
-## Install
+## Installation
 
 - `npm install react-native-navigation-hooks --save`, or
 - `yarn add react-native-navigation-hooks`
 
-## Use
+## Usage
 
 ### useNavigationComponentDidAppear
 
@@ -264,5 +264,26 @@ const ScreenComponent = ({ componentId }) => {
       <Text>Screen Component</Text>
     </View>
   )
+}
+```
+
+## Suggestions
+
+### Memoize your handlers
+
+You can take advantage of the [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) hook to memoize your handlers.
+
+```js
+import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  const handler = useCallback(
+    e => {
+      console.log(`Parameter: ${parameter}`)
+    },
+    [paramenter]
+  )
+
+  useNavigationButtonPress(handler, componentId, 'profileButton')
 }
 ```
