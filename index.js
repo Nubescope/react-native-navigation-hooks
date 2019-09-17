@@ -12,7 +12,7 @@ function useNavigationComponentDidAppear(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 function useNavigationComponentDidDisappear(handler, componentId) {
@@ -26,7 +26,7 @@ function useNavigationComponentDidDisappear(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 function useNavigationCommand(handler, commandName) {
@@ -40,7 +40,7 @@ function useNavigationCommand(handler, commandName) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, commandName])
 }
 
 function useNavigationCommandComplete(handler, commandName) {
@@ -54,7 +54,7 @@ function useNavigationCommandComplete(handler, commandName) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, commandName])
 }
 
 function useNavigationModalDismiss(handler, componentId) {
@@ -68,7 +68,7 @@ function useNavigationModalDismiss(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 function useNavigationBottomTabSelect(handler) {
@@ -76,7 +76,7 @@ function useNavigationBottomTabSelect(handler) {
     const subscription = Navigation.events().registerBottomTabSelectedListener(handler)
 
     return () => subscription.remove()
-  }, [])
+  }, [handler])
 }
 
 function useNavigationButtonPress(handler, componentId, buttonId) {
@@ -97,7 +97,7 @@ function useNavigationButtonPress(handler, componentId, buttonId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId, buttonId])
 }
 
 function useNavigationSearchBarUpdate(handler, componentId) {
@@ -111,7 +111,7 @@ function useNavigationSearchBarUpdate(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 function useNavigationSearchBarCancelPress(handler, componentId) {
@@ -125,13 +125,12 @@ function useNavigationSearchBarCancelPress(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 function useNavigationPreviewComplete(handler, componentId) {
   useEffect(() => {
     const subscription = Navigation.events().registerPreviewCompletedListener(event => {
-      console.warn('event', event)
       const equalComponentId = event.componentId === componentId
 
       if (equalComponentId || !componentId) {
@@ -140,7 +139,7 @@ function useNavigationPreviewComplete(handler, componentId) {
     })
 
     return () => subscription.remove()
-  }, [])
+  }, [handler, componentId])
 }
 
 export {
