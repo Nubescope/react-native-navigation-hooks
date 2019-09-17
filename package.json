@@ -15,5 +15,14 @@
     "react": ">=16.8.3",
     "react-native": ">=0.59.0",
     "react-native-navigation": ">=2.21.0"
+  },
+  "scripts": {
+    "lint": "eslint *.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.4.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1"
   }
 }
