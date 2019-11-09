@@ -1,7 +1,18 @@
 import { useEffect } from 'react'
-import { Navigation } from 'react-native-navigation'
+import {
+  Navigation,
+  ComponentDidAppearEvent,
+  ComponentDidDisappearEvent,
+  CommandCompletedEvent,
+  ModalDismissedEvent,
+  BottomTabSelectedEvent,
+  NavigationButtonPressedEvent,
+  SearchBarUpdatedEvent,
+  PreviewCompletedEvent,
+  SearchBarCancelPressedEvent,
+} from 'react-native-navigation'
 
-function useNavigationComponentDidAppear(handler, componentId) {
+function useNavigationComponentDidAppear(handler: (event: ComponentDidAppearEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerComponentDidAppearListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -15,7 +26,7 @@ function useNavigationComponentDidAppear(handler, componentId) {
   }, [handler, componentId])
 }
 
-function useNavigationComponentDidDisappear(handler, componentId) {
+function useNavigationComponentDidDisappear(handler: (event: ComponentDidDisappearEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerComponentDidDisappearListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -29,7 +40,7 @@ function useNavigationComponentDidDisappear(handler, componentId) {
   }, [handler, componentId])
 }
 
-function useNavigationCommand(handler, commandName) {
+function useNavigationCommand(handler: (name: string, params: any) => void, commandName: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerCommandListener((name, params) => {
       const equalCommandName = name === commandName
@@ -43,11 +54,13 @@ function useNavigationCommand(handler, commandName) {
   }, [handler, commandName])
 }
 
-function useNavigationCommandComplete(handler, commandName) {
+function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) => void, commandName: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerCommandCompletedListener(event => {
+      // @ts-ignore: This is related to this issue https://github.com/wix/react-native-navigation/issues/5641
       const equalCommandName = event.commandName === commandName
-
+      
+      // Until the PR is merged this will work only on IOS (more info: https://github.com/wix/react-native-navigation/pull/5643)
       if (equalCommandName || !commandName) {
         handler(event)
       }
@@ -57,7 +70,7 @@ function useNavigationCommandComplete(handler, commandName) {
   }, [handler, commandName])
 }
 
-function useNavigationModalDismiss(handler, componentId) {
+function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerModalDismissedListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -71,7 +84,7 @@ function useNavigationModalDismiss(handler, componentId) {
   }, [handler, componentId])
 }
 
-function useNavigationBottomTabSelect(handler) {
+function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) => void) {
   useEffect(() => {
     const subscription = Navigation.events().registerBottomTabSelectedListener(handler)
 
@@ -79,7 +92,11 @@ function useNavigationBottomTabSelect(handler) {
   }, [handler])
 }
 
-function useNavigationButtonPress(handler, componentId, buttonId) {
+function useNavigationButtonPress(
+  handler: (event: NavigationButtonPressedEvent) => void,
+  componentId: string,
+  buttonId: string
+) {
   useEffect(() => {
     const subscription = Navigation.events().registerNavigationButtonPressedListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -100,7 +117,7 @@ function useNavigationButtonPress(handler, componentId, buttonId) {
   }, [handler, componentId, buttonId])
 }
 
-function useNavigationSearchBarUpdate(handler, componentId) {
+function useNavigationSearchBarUpdate(handler: (event: SearchBarUpdatedEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerSearchBarUpdatedListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -114,7 +131,7 @@ function useNavigationSearchBarUpdate(handler, componentId) {
   }, [handler, componentId])
 }
 
-function useNavigationSearchBarCancelPress(handler, componentId) {
+function useNavigationSearchBarCancelPress(handler: (event: SearchBarCancelPressedEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerSearchBarCancelPressedListener(event => {
       const equalComponentId = event.componentId === componentId
@@ -128,7 +145,7 @@ function useNavigationSearchBarCancelPress(handler, componentId) {
   }, [handler, componentId])
 }
 
-function useNavigationPreviewComplete(handler, componentId) {
+function useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) => void, componentId: string) {
   useEffect(() => {
     const subscription = Navigation.events().registerPreviewCompletedListener(event => {
       const equalComponentId = event.componentId === componentId
