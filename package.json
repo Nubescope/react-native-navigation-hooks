@@ -24,7 +24,7 @@
   },
   "scripts": {
     "lint": "eslint *.js",
-    "build": "rm -rf ./lib/dist && tsc"
+    "build": "rm -rf ./dist && tsc"
   },
   "devDependencies": {
     "@types/react": "16.9.11",
