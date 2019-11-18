@@ -22,7 +22,8 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "types": ["react", "react-native", "react-native-navigation"]
+    "types": ["react", "react-native", "react-native-navigation", "jest"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "tests", "**/__tests__/**/*", "**/__stories__/**/*", "*.test.ts", "*.test.tsx"]
 }

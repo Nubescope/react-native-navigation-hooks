@@ -24,18 +24,56 @@
   },
   "scripts": {
     "lint": "eslint *.js",
-    "build": "rm -rf ./dist && tsc"
+    "build": "rm -rf ./dist && tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "release": "semantic-release"
   },
   "devDependencies": {
+    "@babel/core": "7.7.2",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/preset-env": "7.7.1",
+    "@babel/preset-react": "7.7.0",
+    "@babel/preset-typescript": "7.7.2",
+    "@semantic-release/changelog": "3.0.6",
+    "@semantic-release/git": "7.0.18",
+    "@semantic-release/npm": "5.3.4",
+    "@testing-library/react-hooks": "3.2.1",
+    "@types/jest": "24.0.23",
     "@types/react": "16.9.11",
     "@types/react-native": ">=0.59.0",
     "babel-eslint": "10.0.3",
     "eslint": "6.4.0",
+    "eslint-config-prettier": "6.6.0",
+    "eslint-plugin-prettier": "3.1.1",
     "eslint-plugin-react": "7.14.3",
     "eslint-plugin-react-hooks": "2.0.1",
+    "jest": "24.9.0",
+    "prettier": "1.19.1",
     "react": ">=16.8.3",
     "react-native": ">=0.59.0",
     "react-native-navigation": ">=2.21.0",
+    "react-test-renderer": "16.12.0",
+    "semantic-release": "15.13.31",
     "typescript": "3.7.2"
+  },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ]
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
   }
 }
