@@ -12,75 +12,86 @@ import {
   SearchBarCancelPressedEvent,
 } from 'react-native-navigation'
 
-function useNavigationComponentDidAppear(handler: (event: ComponentDidAppearEvent) => void, componentId: string) {
+function useNavigationComponentDidAppear(handler: (event: ComponentDidAppearEvent) => void, componentId?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerComponentDidAppearListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
-function useNavigationComponentDidDisappear(handler: (event: ComponentDidDisappearEvent) => void, componentId: string) {
+function useNavigationComponentDidDisappear(
+  handler: (event: ComponentDidDisappearEvent) => void,
+  componentId?: string
+) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerComponentDidDisappearListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
-function useNavigationCommand(handler: (name: string, params: any) => void, commandName: string) {
+function useNavigationCommand(handler: (name: string, params: any) => void, commandName?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerCommandListener((name, params) => {
       const equalCommandName = name === commandName
 
-      if (equalCommandName || !commandName) {
-        handler(name, params)
+      if (commandName && !equalCommandName) {
+        return
       }
+
+      handler(name, params)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, commandName])
 }
 
-function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) => void, commandName: string) {
+function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) => void, commandName?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerCommandCompletedListener(event => {
-      // @ts-ignore: This is related to this issue https://github.com/wix/react-native-navigation/issues/5641
       const equalCommandName = event.commandName === commandName
 
-      // Until the PR is merged this will work only on IOS (more info: https://github.com/wix/react-native-navigation/pull/5643)
-      if (equalCommandName || !commandName) {
-        handler(event)
+      if (commandName && !equalCommandName) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, commandName])
 }
 
-function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void, componentId: string) {
+function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void, componentId?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerModalDismissedListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
@@ -88,74 +99,79 @@ function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) =
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerBottomTabSelectedListener(handler)
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler])
 }
 
 function useNavigationButtonPress(
   handler: (event: NavigationButtonPressedEvent) => void,
-  componentId: string,
-  buttonId: string
+  componentId?: string,
+  buttonId?: string
 ) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerNavigationButtonPressedListener(event => {
       const equalComponentId = event.componentId === componentId
       const equalButtonId = event.buttonId === buttonId
 
-      if (equalComponentId && equalButtonId) {
-        handler(event)
-      } else if (!buttonId && equalComponentId) {
-        handler(event)
-      } else if (!componentId && equalButtonId) {
-        handler(event)
-      } else if (!componentId && !buttonId) {
-        handler(event)
+      if ((componentId && !equalComponentId) || (buttonId && !equalButtonId)) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId, buttonId])
 }
 
-function useNavigationSearchBarUpdate(handler: (event: SearchBarUpdatedEvent) => void, componentId: string) {
+function useNavigationSearchBarUpdate(handler: (event: SearchBarUpdatedEvent) => void, componentId?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerSearchBarUpdatedListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
-function useNavigationSearchBarCancelPress(handler: (event: SearchBarCancelPressedEvent) => void, componentId: string) {
+function useNavigationSearchBarCancelPress(
+  handler: (event: SearchBarCancelPressedEvent) => void,
+  componentId?: string
+) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerSearchBarCancelPressedListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
-function useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) => void, componentId: string) {
+function useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) => void, componentId?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerPreviewCompletedListener(event => {
       const equalComponentId = event.componentId === componentId
 
-      if (equalComponentId || !componentId) {
-        handler(event)
+      if (componentId && !equalComponentId) {
+        return
       }
+
+      handler(event)
     })
 
-    return () => subscription.remove()
+    return subscription.remove
   }, [handler, componentId])
 }
 
