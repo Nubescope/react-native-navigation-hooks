@@ -5,6 +5,7 @@ A set of React hooks for React Native Navigation
 [![version](https://img.shields.io/npm/v/react-native-navigation-hooks.svg)](https://www.npmjs.com/package/react-native-navigation-hooks)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/react-native-navigation-hooks.svg)](https://www.npmjs.com/package/react-native-navigation-hooks)
 [![downloads](https://img.shields.io/npm/dt/react-native-navigation-hooks.svg)](https://www.npmjs.com/package/react-native-navigation-hooks)
+[![codecov](https://codecov.io/gh/underscopeio/react-native-navigation-hooks/branch/master/graph/badge.svg)](https://codecov.io/gh/underscopeio/react-native-navigation-hooks)
 
 ## Installation
 

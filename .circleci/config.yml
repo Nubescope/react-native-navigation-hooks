@@ -1,0 +1,90 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.0.5
+
+refs:
+  container: &container
+    docker:
+      - image: node:12.13.0
+    working_directory: ~/repo
+  steps:
+    - &Versions
+      run:
+        name: Versions
+        command: node -v && npm -v && yarn -v
+    - &CacheRestore
+      restore_cache:
+        key: dependency-cache-{{ checksum "yarn.lock" }}
+    - &Install
+      run:
+        name: Install Dependencies
+        command: yarn install --pure-lockfile
+    - &CacheSave
+      save_cache:
+        key: dependency-cache-{{ checksum "yarn.lock" }}
+        paths:
+          - ./node_modules
+    - &Build
+      run:
+        name: Build
+        command: yarn build
+    - &Lint
+      run:
+        name: Lint
+        command: yarn lint
+    - &Test
+      run:
+        name: Test
+        command: yarn test:coverage
+    - &UploadCoverage
+      codecov/upload:
+        file: coverage/*.json
+        flags: unittest
+    - &Release
+      run:
+        name: Release
+        command: yarn release
+jobs:
+  verify-build-status:
+    <<: *container
+    steps:
+      - checkout
+      - *Versions
+      - *CacheRestore
+      - *Install
+      - *CacheSave
+      - *Build
+      - *Lint
+      - *Test
+      - *UploadCoverage
+
+  release:
+    <<: *container
+    steps:
+      - checkout
+      - *Versions
+      - *CacheRestore
+      - *Install
+      - *CacheSave
+      - *Build
+      - *Lint
+      - *Test
+      - *UploadCoverage
+      - *Release
+
+workflows:
+  version: 2
+  run-checks:
+    jobs:
+      - verify-build-status:
+          filters:
+            branches:
+              ignore:
+                - master
+  release:
+    jobs:
+      - release:
+          filters:
+            branches:
+              only: master
