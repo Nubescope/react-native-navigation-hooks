@@ -24,7 +24,7 @@ function useNavigationComponentDidAppear(handler: (event: ComponentDidAppearEven
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
@@ -43,7 +43,7 @@ function useNavigationComponentDidDisappear(
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
@@ -59,7 +59,7 @@ function useNavigationCommand(handler: (name: string, params: any) => void, comm
       handler(name, params)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, commandName])
 }
 
@@ -75,7 +75,7 @@ function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) =>
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, commandName])
 }
 
@@ -91,7 +91,7 @@ function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
@@ -99,7 +99,7 @@ function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) =
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerBottomTabSelectedListener(handler)
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler])
 }
 
@@ -120,7 +120,7 @@ function useNavigationButtonPress(
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId, buttonId])
 }
 
@@ -136,7 +136,7 @@ function useNavigationSearchBarUpdate(handler: (event: SearchBarUpdatedEvent) =>
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
@@ -155,7 +155,7 @@ function useNavigationSearchBarCancelPress(
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
@@ -171,7 +171,7 @@ function useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) =>
       handler(event)
     })
 
-    return subscription.remove
+    return () => subscription.remove()
   }, [handler, componentId])
 }
 
