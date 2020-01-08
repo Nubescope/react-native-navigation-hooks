@@ -106,12 +106,12 @@ function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) =
 function useNavigationButtonPress(
   handler: (event: NavigationButtonPressedEvent) => void,
   componentId?: string,
-  buttonId?: string
+  buttonId?: string | Array<string>
 ) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerNavigationButtonPressedListener(event => {
       const equalComponentId = event.componentId === componentId
-      const equalButtonId = event.buttonId === buttonId
+      const equalButtonId = Array.isArray(buttonId) ? buttonId.indexOf(event.buttonId) > -1 : event.buttonId === buttonId
 
       if ((componentId && !equalComponentId) || (buttonId && !equalButtonId)) {
         return
