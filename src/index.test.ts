@@ -643,6 +643,26 @@ describe('useNavigationButtonPress', () => {
     expect(result.error).toBeUndefined()
   })
 
+  it('should call the handler if an array of buttonId is provided', () => {
+    const { result } = renderHook(() => {
+      useNavigationButtonPress(mockHandler, undefined, ['BUTTON_ID_1', 'BUTTON_ID_2'])
+    })
+
+    const event1 = { componentId: 'COMPONENT_ID_1', buttonId: 'BUTTON_ID_1' }
+    triggerEvent(event1)
+
+    const event2 = { componentId: 'COMPONENT_ID_1', buttonId: 'BUTTON_ID_2' }
+    triggerEvent(event2)
+
+
+    expect(mockHandler).toBeCalledTimes(2)
+    expect(mockHandler).toHaveBeenNthCalledWith(1, event1)
+    expect(mockHandler).toHaveBeenNthCalledWith(2, event2)
+    
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+  })
+
   it('should never call the handler if buttonId does not match', () => {
     const { result } = renderHook(() => {
       useNavigationButtonPress(mockHandler, undefined, 'BUTTON_ID_2')
@@ -657,9 +677,38 @@ describe('useNavigationButtonPress', () => {
     expect(result.error).toBeUndefined()
   })
 
+  it('should never call the handler if buttonId is not included on the buttonId array', () => {
+    const { result } = renderHook(() => {
+      useNavigationButtonPress(mockHandler, undefined, ['BUTTON_ID_1', 'BUTTON_ID_2'])
+    })
+
+    const event = { componentId: 'COMPONENT_ID_1', buttonId: 'BUTTON_ID_3' }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(0)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+  })
+
   it('should call the handler only if componentId and buttonId matches', () => {
     const { result } = renderHook(() => {
       useNavigationButtonPress(mockHandler, 'COMPONENT_ID_1', 'BUTTON_ID_1')
+    })
+
+    const event = { componentId: 'COMPONENT_ID_1', buttonId: 'BUTTON_ID_1' }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+  })
+
+  it('should call the handler only if componentId and buttonId is included on the buttonId array', () => {
+    const { result } = renderHook(() => {
+      useNavigationButtonPress(mockHandler, 'COMPONENT_ID_1', ['BUTTON_ID_1', 'BUTTON_ID_2'])
     })
 
     const event = { componentId: 'COMPONENT_ID_1', buttonId: 'BUTTON_ID_1' }
