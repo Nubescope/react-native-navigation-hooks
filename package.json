@@ -20,7 +20,7 @@
   "peerDependencies": {
     "react": ">=16.8.3",
     "react-native": ">=0.59.0",
-    "react-native-navigation": ">=2.21.0"
+    "react-native-navigation": ">=4.0.7"
   },
   "scripts": {
     "lint": "eslint *.js",
@@ -52,7 +52,7 @@
     "prettier": "1.19.1",
     "react": ">=16.8.3",
     "react-native": ">=0.59.0",
-    "react-native-navigation": ">=2.21.0",
+    "react-native-navigation": ">=4.0.7",
     "react-test-renderer": "16.12.0",
     "semantic-release": "15.13.31",
     "typescript": "3.7.2"
