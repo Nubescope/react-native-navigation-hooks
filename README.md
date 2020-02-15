@@ -134,6 +134,32 @@ const ScreenComponent = ({ componentId }) => {
 }
 ```
 
+### useNavigationScreenPop
+
+Invoked when screen is popped. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerscreenpoppedlistener)
+
+```js
+import { useNavigationScreenPop } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  // Global listener
+  useNavigationScreenPop(e => {
+    console.log(`Screen was popped: ${e.componentId}`)
+  })
+
+  // Listen events only for this screen (componentId)
+  useNavigationScreenPop(e => {
+    console.log(`Screen was popped: ${e.componentId}`)
+  }, componentId)
+
+  return (
+    <View>
+      <Text>Screen Component</Text>
+    </View>
+  )
+}
+```
+
 ### useNavigationBottomTabSelect
 
 Invoked when a BottomTab is selected by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerbottomtabselectedlistener)
