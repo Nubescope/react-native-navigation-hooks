@@ -11,6 +11,7 @@ import {
   SearchBarUpdatedEvent,
   SearchBarCancelPressedEvent,
   PreviewCompletedEvent,
+  ComponentType,
 } from 'react-native-navigation'
 
 import {
@@ -31,6 +32,7 @@ describe('useNavigationComponentDidAppear', () => {
   let triggerEvent: (event: ComponentDidAppearEvent) => void
   let mockRemoveSubscription: () => void
   let mockHandler: () => void
+  let mockComponentType: ComponentType = 'Component'
 
   beforeEach(() => {
     mockHandler = jest.fn(() => {})
@@ -74,10 +76,21 @@ describe('useNavigationComponentDidAppear', () => {
       useNavigationComponentDidAppear(mockHandler)
     })
 
-    const event1 = { componentId: 'COMPONENT_ID_1', componentName: 'COMPONENT_NAME_1', passProps: {} }
+    const event1 = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
+
     triggerEvent(event1)
 
-    const event2 = { componentId: 'COMPONENT_ID_2', componentName: 'COMPONENT_NAME_2', passProps: {} }
+    const event2 = {
+      componentId: 'COMPONENT_ID_2',
+      componentName: 'COMPONENT_NAME_2',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event2)
 
     expect(mockHandler).toBeCalledTimes(2)
@@ -93,7 +106,12 @@ describe('useNavigationComponentDidAppear', () => {
       useNavigationComponentDidAppear(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_1', componentName: 'COMPONENT_NAME_1', passProps: {} }
+    const event = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(1)
@@ -108,7 +126,12 @@ describe('useNavigationComponentDidAppear', () => {
       useNavigationComponentDidAppear(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_2', componentName: 'COMPONENT_NAME_2', passProps: {} }
+    const event = {
+      componentId: 'COMPONENT_ID_2',
+      componentName: 'COMPONENT_NAME_2',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(0)
@@ -122,6 +145,7 @@ describe('useNavigationComponentDidDisappear', () => {
   let triggerEvent: (event: ComponentDidDisappearEvent) => void
   let mockRemoveSubscription: () => void
   let mockHandler: () => void
+  let mockComponentType: ComponentType = 'Component'
 
   beforeEach(() => {
     mockHandler = jest.fn(() => {})
@@ -165,10 +189,20 @@ describe('useNavigationComponentDidDisappear', () => {
       useNavigationComponentDidDisappear(mockHandler)
     })
 
-    const event1 = { componentId: 'COMPONENT_ID_1', componentName: 'COMPONENT_NAME_1', passProps: {} }
+    const event1 = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event1)
 
-    const event2 = { componentId: 'COMPONENT_ID_2', componentName: 'COMPONENT_NAME_2', passProps: {} }
+    const event2 = {
+      componentId: 'COMPONENT_ID_2',
+      componentName: 'COMPONENT_NAME_2',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event2)
 
     expect(mockHandler).toBeCalledTimes(2)
@@ -184,7 +218,12 @@ describe('useNavigationComponentDidDisappear', () => {
       useNavigationComponentDidDisappear(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_1', componentName: 'COMPONENT_NAME_1', passProps: {} }
+    const event = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(1)
@@ -199,7 +238,12 @@ describe('useNavigationComponentDidDisappear', () => {
       useNavigationComponentDidDisappear(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_2', componentName: 'COMPONENT_NAME_2', passProps: {} }
+    const event = {
+      componentId: 'COMPONENT_ID_2',
+      componentName: 'COMPONENT_NAME_2',
+      componentType: mockComponentType,
+      passProps: {},
+    }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(0)
@@ -525,10 +569,10 @@ describe('useNavigationModalDismiss', () => {
       useNavigationModalDismiss(mockHandler)
     })
 
-    const event1 = { componentId: 'COMPONENT_ID_1' }
+    const event1 = { componentId: 'COMPONENT_ID_1', modalsDismissed: 1 }
     triggerEvent(event1)
 
-    const event2 = { componentId: 'COMPONENT_ID_2' }
+    const event2 = { componentId: 'COMPONENT_ID_2', modalsDismissed: 1 }
     triggerEvent(event2)
 
     expect(mockHandler).toBeCalledTimes(2)
@@ -544,7 +588,7 @@ describe('useNavigationModalDismiss', () => {
       useNavigationModalDismiss(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_1' }
+    const event = { componentId: 'COMPONENT_ID_1', modalsDismissed: 1 }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(1)
@@ -559,7 +603,7 @@ describe('useNavigationModalDismiss', () => {
       useNavigationModalDismiss(mockHandler, 'COMPONENT_ID_1')
     })
 
-    const event = { componentId: 'COMPONENT_ID_2' }
+    const event = { componentId: 'COMPONENT_ID_2', modalsDismissed: 1 }
     triggerEvent(event)
 
     expect(mockHandler).toBeCalledTimes(0)
