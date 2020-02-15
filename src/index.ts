@@ -4,6 +4,7 @@ import {
   ComponentDidAppearEvent,
   ComponentDidDisappearEvent,
   CommandCompletedEvent,
+  ModalAttemptedToDismissEvent,
   ModalDismissedEvent,
   ScreenPoppedEvent,
   BottomTabSelectedEvent,
@@ -78,6 +79,25 @@ function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) =>
 
     return () => subscription.remove()
   }, [handler, commandName])
+}
+
+function useNavigationModalAttemptedToDismiss(
+  handler: (event: ModalAttemptedToDismissEvent) => void,
+  componentId?: string
+) {
+  useLayoutEffect(() => {
+    const subscription = Navigation.events().registerModalAttemptedToDismissListener(event => {
+      const equalCommandId = event.componentId === componentId
+
+      if (componentId && !equalCommandId) {
+        return
+      }
+
+      handler(event)
+    })
+
+    return () => subscription.remove()
+  }, [handler, componentId])
 }
 
 function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void, componentId?: string) {
@@ -197,6 +217,7 @@ export {
   useNavigationComponentDidDisappear,
   useNavigationCommand,
   useNavigationCommandComplete,
+  useNavigationModalAttemptedToDismiss,
   useNavigationModalDismiss,
   useNavigationScreenPop,
   useNavigationBottomTabSelect,
