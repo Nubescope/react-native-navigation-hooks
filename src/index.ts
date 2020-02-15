@@ -8,6 +8,7 @@ import {
   ModalDismissedEvent,
   ScreenPoppedEvent,
   BottomTabSelectedEvent,
+  BottomTabLongPressedEvent,
   NavigationButtonPressedEvent,
   SearchBarUpdatedEvent,
   PreviewCompletedEvent,
@@ -140,6 +141,14 @@ function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) =
   }, [handler])
 }
 
+function useNavigationBottomTabLongPress(handler: (event: BottomTabLongPressedEvent) => void) {
+  useLayoutEffect(() => {
+    const subscription = Navigation.events().registerBottomTabLongPressedListener(handler)
+
+    return () => subscription.remove()
+  }, [handler])
+}
+
 function useNavigationButtonPress(
   handler: (event: NavigationButtonPressedEvent) => void,
   componentId?: string,
@@ -221,6 +230,7 @@ export {
   useNavigationModalDismiss,
   useNavigationScreenPop,
   useNavigationBottomTabSelect,
+  useNavigationBottomTabLongPress,
   useNavigationButtonPress,
   useNavigationSearchBarUpdate,
   useNavigationSearchBarCancelPress,
