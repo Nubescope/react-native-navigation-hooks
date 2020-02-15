@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v3.3.1...v4.0.0) (2020-02-15)
+
+
+### Features
+
+* **events:** add new registerScreenPoppedListener ([fea1feb](https://github.com/underscopeio/react-native-navigation-hooks/commit/fea1feb9bbfc90b9cc2b79f4570ba0087aa91388))
+
+
+### BREAKING CHANGES
+
+* **events:** RNN version was upgraded to 4.0.7
+
 ## [3.3.1](https://github.com/underscopeio/react-native-navigation-hooks/compare/v3.3.0...v3.3.1) (2019-11-24)
 
 
