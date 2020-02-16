@@ -4,9 +4,11 @@ import {
   ComponentDidAppearEvent,
   ComponentDidDisappearEvent,
   CommandCompletedEvent,
+  ModalAttemptedToDismissEvent,
   ModalDismissedEvent,
   ScreenPoppedEvent,
   BottomTabSelectedEvent,
+  BottomTabLongPressedEvent,
   NavigationButtonPressedEvent,
   SearchBarUpdatedEvent,
   PreviewCompletedEvent,
@@ -80,6 +82,25 @@ function useNavigationCommandComplete(handler: (event: CommandCompletedEvent) =>
   }, [handler, commandName])
 }
 
+function useNavigationModalAttemptedToDismiss(
+  handler: (event: ModalAttemptedToDismissEvent) => void,
+  componentId?: string
+) {
+  useLayoutEffect(() => {
+    const subscription = Navigation.events().registerModalAttemptedToDismissListener(event => {
+      const equalCommandId = event.componentId === componentId
+
+      if (componentId && !equalCommandId) {
+        return
+      }
+
+      handler(event)
+    })
+
+    return () => subscription.remove()
+  }, [handler, componentId])
+}
+
 function useNavigationModalDismiss(handler: (event: ModalDismissedEvent) => void, componentId?: string) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerModalDismissedListener(event => {
@@ -115,6 +136,14 @@ function useNavigationScreenPop(handler: (event: ScreenPoppedEvent) => void, com
 function useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) => void) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerBottomTabSelectedListener(handler)
+
+    return () => subscription.remove()
+  }, [handler])
+}
+
+function useNavigationBottomTabLongPress(handler: (event: BottomTabLongPressedEvent) => void) {
+  useLayoutEffect(() => {
+    const subscription = Navigation.events().registerBottomTabLongPressedListener(handler)
 
     return () => subscription.remove()
   }, [handler])
@@ -197,9 +226,11 @@ export {
   useNavigationComponentDidDisappear,
   useNavigationCommand,
   useNavigationCommandComplete,
+  useNavigationModalAttemptedToDismiss,
   useNavigationModalDismiss,
   useNavigationScreenPop,
   useNavigationBottomTabSelect,
+  useNavigationBottomTabLongPress,
   useNavigationButtonPress,
   useNavigationSearchBarUpdate,
   useNavigationSearchBarCancelPress,
