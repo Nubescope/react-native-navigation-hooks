@@ -1,3 +1,21 @@
+# [5.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v4.0.0...v5.0.0) (2020-02-16)
+
+
+### chore
+
+* **deps:** upgrade node modules: ([f8b7e31](https://github.com/underscopeio/react-native-navigation-hooks/commit/f8b7e31e23eb6d58e348b837e8194579c7bb072b))
+
+
+### Features
+
+* **events:** Add BottomTabLongPressed event ([d5d1bd4](https://github.com/underscopeio/react-native-navigation-hooks/commit/d5d1bd4d69ea107e9895afd1421d540c26c356aa))
+* **events:** Add ModalAttemptedToDismiss event ([79e6078](https://github.com/underscopeio/react-native-navigation-hooks/commit/79e6078232cda351ceb724d84e4caed97726057d))
+
+
+### BREAKING CHANGES
+
+* **deps:** RNN version was upgraded to >=4.5.0
+
 # [4.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v3.3.1...v4.0.0) (2020-02-15)
 
 
