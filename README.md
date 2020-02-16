@@ -108,6 +108,32 @@ const ScreenComponent = ({ componentId }) => {
 }
 ```
 
+### useNavigationModalAttemptedToDismiss
+
+Invoked only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registermodalattemptedtodismisslistenerios-13-only)
+
+```js
+import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  // Global listener
+  useNavigationModalAttemptedToDismiss(e => {
+    console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
+  })
+
+  // Listen events only for this screen (componentId)
+  useNavigationModalAttemptedToDismiss(e => {
+    console.log(`Modal attempted dismissed on componentId:${e.componentId}`)
+  }, componentId)
+
+  return (
+    <View>
+      <Text>Screen Component</Text>
+    </View>
+  )
+}
+```
+
 ### useNavigationModalDismiss
 
 Invoked when modal dismissed. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registermodaldismissedlistener)
@@ -118,12 +144,12 @@ import { useNavigationModalDismiss } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationModalDismiss(e => {
-    console.log(`Modals dismissed: ${modalsDismissed} on ${e.componentId}`)
+    console.log(`Modals dismissed: ${e.modalsDismissed} on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen (componentId)
   useNavigationModalDismiss(e => {
-    console.log(`Modals dismissed: ${modalsDismissed}`)
+    console.log(`Modals dismissed: ${e.modalsDismissed}`)
   }, componentId)
 
   return (
@@ -144,12 +170,12 @@ import { useNavigationScreenPop } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationScreenPop(e => {
-    console.log(`Screen was popped: ${e.componentId}`)
+    console.log(`Screen was popped on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen (componentId)
   useNavigationScreenPop(e => {
-    console.log(`Screen was popped: ${e.componentId}`)
+    console.log(`Screen was popped on componentId: ${e.componentId}`)
   }, componentId)
 
   return (
@@ -170,7 +196,28 @@ import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationBottomTabSelect(e => {
-    console.log(`Selected tab id ${unselectedTabIndex}, unselected tab id ${unselectedTabIndex}`)
+    console.log(`Selected tab id ${e.selectedTabIndex}, unselected tab id ${e.unselectedTabIndex}`)
+  })
+
+  return (
+    <View>
+      <Text>Screen Component</Text>
+    </View>
+  )
+}
+```
+
+### useNavigationBottomTabLongPress
+
+Invoked when a BottomTab is long pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerbottomtablongpressedlistener)
+
+```js
+import { useNavigationBottomTabLongPress } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  // Global listener
+  useNavigationBottomTabLongPress(e => {
+    console.log(`Selected tab id ${e.selectedTabIndex}`)
   })
 
   return (
@@ -191,7 +238,7 @@ import { useNavigationButtonPress } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationButtonPress(e => {
-    console.log(`Pressed ${e.buttonId} on ${e.componentId}`)
+    console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen (componentId)
@@ -226,7 +273,9 @@ import { useNavigationSearchBarUpdate } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationSearchBarUpdate(e => {
-    console.log(`Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on ${e.componentId}`)
+    console.log(
+      `Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on componentId: ${e.componentId}`
+    )
   })
 
   // Listen events only for this screen (componentId)
@@ -252,7 +301,7 @@ import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationSearchBarCancelPress(e => {
-    console.log(`Seach bar cancel button pressed on ${e.componentId}`)
+    console.log(`Seach bar cancel button pressed on componentName: ${e.componentName}`)
   })
 
   // Listen events only for this screen (componentId)
@@ -278,12 +327,12 @@ import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
 const ScreenComponent = ({ componentId }) => {
   // Global listener
   useNavigationPreviewComplete(e => {
-    console.log(`Preview component ${previewComponentId} shown on ${e.componentId}`)
+    console.log(`Preview component ${e.previewComponentId} shown on ${e.componentId}`)
   })
 
   // Listen events only for this screen (componentId)
   useNavigationPreviewComplete(e => {
-    console.log(`Preview component ${previewComponentId} shown on this screen`)
+    console.log(`Preview component ${e.previewComponentId} shown on this screen`)
   }, componentId)
 
   return (
