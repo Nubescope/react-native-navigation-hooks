@@ -43,11 +43,14 @@
     "@types/react": "16.9.19",
     "@types/react-native": ">=0.59.0",
     "babel-eslint": "10.0.3",
+    "commitizen": "4.0.4",
+    "cz-conventional-changelog": "3.1.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.0",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.18.3",
     "eslint-plugin-react-hooks": "2.3.0",
+    "husky": "4.2.5",
     "jest": "25.1.0",
     "prettier": "1.19.1",
     "react": ">=16.8.3",
@@ -74,6 +77,16 @@
     "preset": "react-native",
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
