@@ -350,7 +350,7 @@ const ScreenComponent = ({ componentId }) => {
 You can take advantage of the [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) hook to memoize your handlers.
 
 ```js
-import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
+import { useNavigationButtonPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   const handler = useCallback(
