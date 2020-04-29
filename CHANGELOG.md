@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v5.0.0...v5.1.0) (2020-04-29)
+
+
+### Features
+
+* **events:** add BottomTabPressed event ([52f429c](https://github.com/underscopeio/react-native-navigation-hooks/commit/52f429c9d59ad9335eeffd0daadeade395606a21))
+
 # [5.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v4.0.0...v5.0.0) (2020-02-16)
 
 
