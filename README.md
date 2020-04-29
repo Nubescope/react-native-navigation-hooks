@@ -207,6 +207,27 @@ const ScreenComponent = ({ componentId }) => {
 }
 ```
 
+### useNavigationBottomTabPress
+
+Invoked when a BottomTab is pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events)
+
+```js
+import { useNavigationBottomTabPress } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  // Global listener
+  useNavigationBottomTabPress(e => {
+    console.log(`Selected tab id ${e.tabIndex}`)
+  })
+
+  return (
+    <View>
+      <Text>Screen Component</Text>
+    </View>
+  )
+}
+```
+
 ### useNavigationBottomTabLongPress
 
 Invoked when a BottomTab is long pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerbottomtablongpressedlistener)
