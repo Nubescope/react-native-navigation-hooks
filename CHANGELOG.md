@@ -1,3 +1,15 @@
+# [6.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v5.1.0...v6.0.0) (2020-04-30)
+
+
+### Build System
+
+* **deps:** upgrade RNN peer dependency to 6.5.0 ([3f735e6](https://github.com/underscopeio/react-native-navigation-hooks/commit/3f735e6d5daa0f2024db5e14fb67dcac01916c0d))
+
+
+### BREAKING CHANGES
+
+* **deps:** bumped RNN peer dependency to 6.5.0 to use BottomTabPress event
+
 # [5.1.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v5.0.0...v5.1.0) (2020-04-29)
 
 
