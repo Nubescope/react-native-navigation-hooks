@@ -20,7 +20,7 @@
   "peerDependencies": {
     "react": ">=16.8.3",
     "react-native": ">=0.59.0",
-    "react-native-navigation": ">=4.5.0"
+    "react-native-navigation": ">=6.5.0"
   },
   "scripts": {
     "lint": "eslint *.js",
