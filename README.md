@@ -12,6 +12,25 @@ A set of React hooks for React Native Navigation
 - `npm install react-native-navigation-hooks --save`, or
 - `yarn add react-native-navigation-hooks`
 
+## Supported versions
+
+<table>
+    <tr>
+        <td>RN Navigation</td>
+        <td align="center">>= 2.21.0</td>
+        <td align="center">>= 4.0.7</td>
+        <td align="center">>= 4.5.0</td>
+        <td align="center">>= 6.5.0</td>
+    </tr>
+    <tr>
+        <td>RN Navigation Hooks</td>
+        <td align="center"><= 3.x.x</td>
+        <td align="center"> 4.x.x</td>
+        <td align="center"> 5.x.x</td>
+        <td align="center"> 6.x.x</td>
+    </tr>
+</table>
+
 ## Usage
 
 ### useNavigationComponentDidAppear
