@@ -4,8 +4,9 @@ module.exports = {
     node: true,
     jest: true,
     jasmine: true,
+    'detox/detox': true,
   },
-  plugins: ['react', 'react-hooks', 'prettier'],
+  plugins: ['react', 'react-hooks', 'prettier', 'detox'],
   extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
