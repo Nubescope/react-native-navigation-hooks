@@ -2,12 +2,14 @@ version: 2.1
 
 orbs:
   codecov: codecov/codecov@1.0.5
+  rn: react-native-community/react-native@1.0.0
 
 refs:
   container: &container
     docker:
       - image: node:12.13.0
     working_directory: ~/repo
+
   steps:
     - &Versions
       run:
@@ -36,7 +38,7 @@ refs:
     - &Test
       run:
         name: Test
-        command: yarn test:coverage
+        command: yarn test:coverage src/
     - &UploadCoverage
       codecov/upload:
         file: coverage/*.json
