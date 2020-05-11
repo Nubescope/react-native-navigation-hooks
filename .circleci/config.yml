@@ -19,7 +19,7 @@ refs:
     - &Install
       run:
         name: Install Dependencies
-        command: yarn install --pure-lockfile
+        command: yarn install --pure-lockfile && cd example yarn install --pure-lockfile
     - &CacheSave
       save_cache:
         key: dependency-cache-{{ checksum "yarn.lock" }}
