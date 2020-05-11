@@ -25,7 +25,7 @@
   "scripts": {
     "lint": "eslint *.js  && cd example && yarn lint",
     "build": "rm -rf ./dist && tsc",
-    "test": "jest",
+    "test": "jest src/",
     "test:coverage": "jest --coverage",
     "release": "semantic-release"
   },
