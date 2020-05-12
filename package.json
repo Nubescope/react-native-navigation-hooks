@@ -23,11 +23,12 @@
     "react-native-navigation": ">=6.5.0"
   },
   "scripts": {
-    "lint": "eslint *.js",
+    "lint": "eslint *.js  && cd example && yarn lint",
     "build": "rm -rf ./dist && tsc",
-    "test": "jest",
+    "test": "jest src/",
     "test:coverage": "jest --coverage",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "postinstall": "cd example && yarn install"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
@@ -82,7 +83,7 @@
   "husky": {
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-push": "yarn test"
+      "pre-push": "yarn lint && yarn test"
     }
   },
   "config": {
