@@ -17,9 +17,9 @@ import {
 } from 'react-native-navigation'
 
 /**
-Registers listener to be called each time component appears on screen (attached to the view hierarchy) 
-[more info](https://wix.github.io/react-native-navigation/api/events/#componentdidappear)
-*/
+ * Registers listener to be called each time component appears on screen (attached to the view hierarchy)
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#componentdidappear)
+ */
 
 function useNavigationComponentDidAppear(
   /**
@@ -48,7 +48,7 @@ function useNavigationComponentDidAppear(
 }
 
 /**
-Registers listener to be called each time component disappears from screen (detached from the view heirarchy) [more info](https://wix.github.io/react-native-navigation/api/events/#componentdiddisappear)
+ * Registers listener to be called each time component disappears from screen (detached from the view heirarchy) * [more info](https://wix.github.io/react-native-navigation/api/events/#componentdiddisappear)
  */
 function useNavigationComponentDidDisappear(
   /**
@@ -79,7 +79,8 @@ function useNavigationComponentDidDisappear(
 }
 
 /**
-Registers listener to be called when a Navigation command (i.e push, pop, showModal etc) is invoked. [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandlistener)
+ * Registers listener to be called when a Navigation command (i.e push, pop, showModal etc) is invoked.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandlistener)
  */
 function useNavigationCommand(
   /**
@@ -108,7 +109,9 @@ function useNavigationCommand(
 }
 
 /**
-Registers listener to be called when a command finishes executing in native. If the command contains animations, for example pushed screen animation,) the listener is invoked after the animation ends. [more info]https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
+ * Registers listener to be called when a command finishes executing in native. If the command contains
+ * animations, for example pushed screen animation) the listener is invoked after the animation ends.
+ * [more info]https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
  */
 function useNavigationCommandComplete(
   /**
@@ -137,7 +140,8 @@ function useNavigationCommandComplete(
 }
 
 /**
-Registers listener to be called only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. [more info](https://wix.github.io/react-native-navigation/api/events/#registermodalattemptedtodismisslistenerios-13-only)
+ * Registers listener to be called only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal * swiped down to dismiss.
+ * [more info](https://wix.github.io/react-native-navigation/apievents#registermodalattemptedtodismisslistenerios-13-only)
  */
 function useNavigationModalAttemptedToDismiss(
   /**
@@ -168,7 +172,8 @@ function useNavigationModalAttemptedToDismiss(
 }
 
 /**
-Registers listener to be called when modal is dismissed. [more info](https://wix.github.io/react-native-navigation/api/events/#registermodaldismissedlistener)
+ * Registers listener to be called when modal is dismissed.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registermodaldismissedlistener)
  */
 function useNavigationModalDismiss(
   /**
@@ -197,7 +202,8 @@ function useNavigationModalDismiss(
 }
 
 /**
-Registers listener to be called when screen is popped. [more info](https://wix.github.io/react-native-navigation/api/events/#registerscreenpoppedlistener)
+ * Registers listener to be called when screen is popped.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registerscreenpoppedlistener)
  */
 function useNavigationScreenPop(
   /**
@@ -226,7 +232,8 @@ function useNavigationScreenPop(
 }
 
 /**
-Registers listener to be called when a BottomTab is selected by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabselectedlistener)
+ * Registers listener to be called when a BottomTab is selected by the user.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabselectedlistener)
  */
 function useNavigationBottomTabSelect(
   /**
@@ -242,7 +249,8 @@ function useNavigationBottomTabSelect(
 }
 
 /**
-Registers listener to be called when a BottomTab is pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabpressedlistener)
+ * Registers listener to be called when a BottomTab is pressed by the user.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabpressedlistener)
  */
 function useNavigationBottomTabPress(
   /**
@@ -258,7 +266,8 @@ function useNavigationBottomTabPress(
 }
 
 /**
-Registers listener to be called when a BottomTab is long pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtablongpressedlistener)
+ * Registers listener to be called when a BottomTab is long pressed by the user.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtablongpressedlistener)
  */
 function useNavigationBottomTabLongPress(
   /**
@@ -274,7 +283,8 @@ function useNavigationBottomTabLongPress(
 }
 
 /**
-Registers listener to be called when a TopBar button is pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#navigationbuttonpressed-event)
+ * Registers listener to be called when a TopBar button is pressed by the user.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#navigationbuttonpressed-event)
  */
 function useNavigationButtonPress(
   /**
@@ -311,7 +321,8 @@ function useNavigationButtonPress(
 }
 
 /**
-Registers listener to be called when a SearchBar from NavigationBar gets updated. [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarupdated-ios-11-only)
+ * Registers listener to be called when a SearchBar from NavigationBar gets updated.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarupdated-ios-11-only)
  */
 function useNavigationSearchBarUpdate(
   /**
@@ -340,7 +351,8 @@ function useNavigationSearchBarUpdate(
 }
 
 /**
-Registers listener to be called when the cancel button on the SearchBar from NavigationBar gets pressed. [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarcancelpressed-ios-11-only)
+ * Registers listener to be called when the cancel button on the SearchBar from NavigationBar gets pressed.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarcancelpressed-ios-11-only)
  */
 function useNavigationSearchBarCancelPress(
   /**
@@ -371,7 +383,8 @@ function useNavigationSearchBarCancelPress(
 }
 
 /**
-Registers listener to be called when preview peek is completed. [more info](https://wix.github.io/react-native-navigation/api/events/#previewcompleted-ios-114-only)
+ * Registers listener to be called when preview peek is completed.
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#previewcompleted-ios-114-only)
  */
 function useNavigationPreviewComplete(
   /**
