@@ -35,7 +35,7 @@ A set of React hooks for React Native Navigation
 
 ### useNavigationComponentDidAppear
 
-Called each time this component appears on screen (attached to the view hierarchy) [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=componentdidappear)
+Called each time this component appears on screen (attached to the view hierarchy) [more info](https://wix.github.io/react-native-navigation/api/events/#componentdidappear)
 
 ```js
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks'
@@ -61,7 +61,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationComponentDidDisappear
 
-Called each time this component disappears from screen (detached from the view heirarchy) [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=componentdiddisappear)
+Called each time this component disappears from screen (detached from the view heirarchy) [more info](https://wix.github.io/react-native-navigation/api/events/#componentdiddisappear)
 
 ```js
 import { useNavigationComponentDidDisappear } from 'react-native-navigation-hooks'
@@ -87,7 +87,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationCommand
 
-The commandListener is called whenever a Navigation command (i.e push, pop, showModal etc) is invoked. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registercommandlistener)
+The commandListener is called whenever a Navigation command (i.e push, pop, showModal etc) is invoked. [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandlistener)
 
 ```js
 import { useNavigationCommand } from 'react-native-navigation-hooks'
@@ -108,7 +108,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationCommandComplete
 
-Invoked when a command finishes executing in native. If the command contains animations, for example pushed screen animation,) the listener is invoked after the animation ends. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registercommandcompletedlistener)
+Invoked when a command finishes executing in native. If the command contains animations, for example pushed screen animation,) the listener is invoked after the animation ends. [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
 
 ```js
 import { useNavigationCommandComplete } from 'react-native-navigation-hooks'
@@ -129,7 +129,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationModalAttemptedToDismiss
 
-Invoked only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registermodalattemptedtodismisslistenerios-13-only)
+Invoked only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. [more info](https://wix.github.io/react-native-navigation/api/events/#registermodalattemptedtodismisslistenerios-13-only)
 
 ```js
 import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-hooks'
@@ -155,7 +155,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationModalDismiss
 
-Invoked when modal dismissed. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registermodaldismissedlistener)
+Invoked when modal dismissed. [more info](https://wix.github.io/react-native-navigation/api/events/#registermodaldismissedlistener)
 
 ```js
 import { useNavigationModalDismiss } from 'react-native-navigation-hooks'
@@ -181,7 +181,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationScreenPop
 
-Invoked when screen is popped. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerscreenpoppedlistener)
+Invoked when screen is popped. [more info](https://wix.github.io/react-native-navigation/api/events/#registerscreenpoppedlistener)
 
 ```js
 import { useNavigationScreenPop } from 'react-native-navigation-hooks'
@@ -207,7 +207,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationBottomTabSelect
 
-Invoked when a BottomTab is selected by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerbottomtabselectedlistener)
+Invoked when a BottomTab is selected by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabselectedlistener)
 
 ```js
 import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks'
@@ -228,7 +228,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationBottomTabPress
 
-Invoked when a BottomTab is pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events)
+Invoked when a BottomTab is pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabpressedlistener)
 
 ```js
 import { useNavigationBottomTabPress } from 'react-native-navigation-hooks'
@@ -249,7 +249,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationBottomTabLongPress
 
-Invoked when a BottomTab is long pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=registerbottomtablongpressedlistener)
+Invoked when a BottomTab is long pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtablongpressedlistener)
 
 ```js
 import { useNavigationBottomTabLongPress } from 'react-native-navigation-hooks'
@@ -270,7 +270,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationButtonPress
 
-Emitted whenever a TopBar button is pressed by the user. [more info](https://wix.github.io/react-native-navigation/#/docs/topBar-buttons?id=handling-button-press-events)
+Emitted whenever a TopBar button is pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#navigationbuttonpressed-event)
 
 ```js
 import { useNavigationButtonPress } from 'react-native-navigation-hooks'
@@ -305,7 +305,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationSearchBarUpdate (iOS 11+ only)
 
-Called when a SearchBar from NavigationBar gets updated. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=searchbarupdated-ios-11-only)
+Called when a SearchBar from NavigationBar gets updated. [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarupdated-ios-11-only)
 
 ```js
 import { useNavigationSearchBarUpdate } from 'react-native-navigation-hooks'
@@ -333,7 +333,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationSearchBarCancelPress (iOS 11+ only)
 
-Called when the cancel button on the SearchBar from NavigationBar gets pressed. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=searchbarcancelpressed-ios-11-only)
+Called when the cancel button on the SearchBar from NavigationBar gets pressed. [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarcancelpressed-ios-11-only)
 
 ```js
 import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks'
@@ -359,7 +359,7 @@ const ScreenComponent = ({ componentId }) => {
 
 ### useNavigationPreviewComplete (iOS 11.4+ only)
 
-Called when preview peek is completed. [more info](https://wix.github.io/react-native-navigation/#/docs/events?id=previewcompleted-ios-114-only)
+Called when preview peek is completed. [more info](https://wix.github.io/react-native-navigation/api/events/#previewcompleted-ios-114-only)
 
 ```js
 import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'

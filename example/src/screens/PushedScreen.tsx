@@ -4,12 +4,13 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import { useNavigationScreenPop } from 'react-native-navigation-hooks'
 
 import { TestLabels } from '../testIDs'
+import { ScreenProps } from '../interfaces'
 
 /**
  * PushedScreen
  */
 
-const PushedScreen = ({ componentId }) => {
+const PushedScreen = ({ componentId }: ScreenProps) => {
   const handleNavigationScreenPop = useCallback(() => {
     Alert.alert(TestLabels.POPPED)
   }, [])

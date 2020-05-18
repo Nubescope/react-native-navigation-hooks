@@ -18,12 +18,13 @@ import { Navigation } from 'react-native-navigation'
 
 import { Screens } from '.'
 import { TestLabels, TestIDs } from '../testIDs'
+import { ScreenProps } from '../interfaces'
 
 /**
  * Home
  */
 
-const Home = ({ componentId }) => {
+const Home = ({ componentId }: ScreenProps) => {
   /**
    * State
    */
@@ -104,37 +105,26 @@ const Home = ({ componentId }) => {
    * Listeners
    */
 
-  // Listener called each time this component appears on screen (attached to the view hierarchy)
   useNavigationComponentDidAppear(handleComponentDidAppear, componentId)
 
-  // Listener called each time this component disappears from screen (detached from the view heirarchy)
   useNavigationComponentDidDisappear(handleComponentDidDisappear, componentId)
 
-  // Listener called whenever a Navigation command (i.e push, pop, showModal etc) is invoked.
   useNavigationCommand(handleNavigationCommand)
 
-  // Global listener called only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. (iOS 13+ only)
   useNavigationModalAttemptedToDismiss(handleNavigationModalAttemptedToDismiss)
 
-  // Global listener called when modal dismissed.
   useNavigationModalDismiss(handleNavigationModalDismiss)
 
-  // Listener called when a BottomTab is pressed by the user.
-  useNavigationBottomTabPress(handleNavigationBottomTabPress, componentId)
+  useNavigationBottomTabPress(handleNavigationBottomTabPress)
 
-  // Listener called when a BottomTab is long pressed by the user.
-  useNavigationBottomTabLongPress(handleNavigationBottomTabLongPress, componentId)
+  useNavigationBottomTabLongPress(handleNavigationBottomTabLongPress)
 
-  // Current screen listener called whenever a TopBar button is pressed by the user.
   useNavigationButtonPress(handleNavigationButtonPress, componentId)
 
-  // Global listener called when a SearchBar from NavigationBar gets updated (iOS 11+ only)
   useNavigationSearchBarUpdate(handleNavigationSearchBarUpdate)
 
-  // Global listener called when the cancel button on the SearchBar from NavigationBar gets pressed (iOS 11+ only)
   useNavigationSearchBarCancelPress(handleNavigationSearchBarCancelPress)
 
-  // Global listener called when preview peek is completed (iOS 11.4+ only)
   useNavigationPreviewComplete(handleNavigationPreviewComplete)
 
   return (

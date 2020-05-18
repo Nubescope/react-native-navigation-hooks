@@ -4,12 +4,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks'
 
 import { TestLabels } from '../testIDs'
+import { ScreenProps } from '../interfaces'
 
 /**
  * SecondaryScreen
  */
 
-const SecondaryScreen = ({ componentId }) => {
+const SecondaryScreen = ({ componentId }: ScreenProps) => {
   /**
    * State
    */
@@ -29,7 +30,7 @@ const SecondaryScreen = ({ componentId }) => {
    */
 
   // Listener called when a BottomTab is selected by the user.
-  useNavigationBottomTabSelect(handleNavigationBottomTabSelect, componentId)
+  useNavigationBottomTabSelect(handleNavigationBottomTabSelect)
 
   return (
     <View style={styles.container}>
