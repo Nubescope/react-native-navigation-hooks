@@ -128,7 +128,7 @@ const Home = ({ componentId }: ScreenProps) => {
   useNavigationPreviewComplete(handleNavigationPreviewComplete)
 
   return (
-    <View testID="welcome">
+    <View style={styles.container} testID="welcome">
       <Text style={styles.text}>{text}</Text>
       <Button title="Push" onPress={handlePushButtonPress} testID={TestIDs.PUSH_BTN} />
       <Button title="Open Modal" onPress={handleOpenModalButtonPress} testID={TestIDs.MODAL_BTN} />
