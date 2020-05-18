@@ -5,12 +5,13 @@ import { useNavigationCommandComplete } from 'react-native-navigation-hooks'
 import { Navigation } from 'react-native-navigation'
 
 import { TestLabels } from '../testIDs'
+import { ScreenProps } from '../interfaces'
 
 /**
  * ModalScreen
  */
 
-const ModalScreen = ({ componentId }) => {
+const ModalScreen = ({ componentId }: ScreenProps) => {
   /**
    * State
    */
