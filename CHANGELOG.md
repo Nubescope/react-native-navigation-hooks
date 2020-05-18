@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.0...v6.0.1) (2020-05-18)
+
+
+### Bug Fixes
+
+* **docs:** add docs to every method to be used with intellisense ([ae938ae](https://github.com/underscopeio/react-native-navigation-hooks/commit/ae938aec76bc9dbbd340c4120cd548488e1bcf12))
+
 # [6.0.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v5.1.0...v6.0.0) (2020-04-30)
 
 
