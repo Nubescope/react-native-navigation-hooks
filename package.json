@@ -27,8 +27,7 @@
     "build": "rm -rf ./dist && tsc",
     "test": "jest src/",
     "test:coverage": "jest --coverage",
-    "release": "semantic-release",
-    "postinstall": "cd example && yarn install"
+    "release": "semantic-release"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
