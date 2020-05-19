@@ -1,3 +1,10 @@
+## [6.0.2](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.1...v6.0.2) (2020-05-19)
+
+
+### Bug Fixes
+
+* **install:** remove post-install script ([2aba746](https://github.com/underscopeio/react-native-navigation-hooks/commit/2aba746174de79a11bd01ef041bdb782073facdf)), closes [#30](https://github.com/underscopeio/react-native-navigation-hooks/issues/30)
+
 ## [6.0.1](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.0...v6.0.1) (2020-05-18)
 
 
