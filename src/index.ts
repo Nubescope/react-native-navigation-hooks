@@ -14,6 +14,7 @@ import {
   SearchBarUpdatedEvent,
   PreviewCompletedEvent,
   SearchBarCancelPressedEvent,
+  Options,
 } from 'react-native-navigation'
 
 /**
@@ -412,6 +413,27 @@ function useNavigationPreviewComplete(
   }, [handler, componentId])
 }
 
+/**
+ * Sets navigation options - equivalent of static options in class components.
+ * [more info](https://wix.github.io/react-native-navigation/api/options-api#mergeoptions)
+ */
+function useNavigationOptions(
+  /**
+   * Component reference id. The id of the component for which the options are related.
+   */
+  componentId: string, 
+
+  /**
+   * The options object to be passed for navigation.
+   * [more info](https://wix.github.io/react-native-navigation/api/options-root)
+   */
+  options: Options
+) {
+  useLayoutEffect(() => {
+    Navigation.mergeOptions(componentId, options);
+  }, []);
+}
+
 export {
   useNavigationComponentDidAppear,
   useNavigationComponentDidDisappear,
@@ -427,4 +449,5 @@ export {
   useNavigationSearchBarUpdate,
   useNavigationSearchBarCancelPress,
   useNavigationPreviewComplete,
+  useNavigationOptions,
 }
