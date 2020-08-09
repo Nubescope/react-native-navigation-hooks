@@ -23,42 +23,37 @@
     "react-native-navigation": ">=6.5.0"
   },
   "scripts": {
-    "lint": "eslint *.js  && cd example && yarn lint",
+    "lint": "eslint src",
     "build": "rm -rf ./dist && tsc",
-    "test": "jest src/",
+    "test": "jest src",
     "test:coverage": "jest --coverage",
     "release": "semantic-release"
   },
   "devDependencies": {
-    "@babel/core": "7.8.4",
-    "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/preset-env": "7.8.4",
-    "@babel/preset-react": "7.8.3",
-    "@babel/preset-typescript": "7.8.3",
-    "@semantic-release/changelog": "5.0.0",
+    "@react-native-community/eslint-config": "2.0.0",
+    "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
-    "@semantic-release/npm": "7.0.3",
-    "@testing-library/react-hooks": "3.2.1",
-    "@types/jest": "25.1.2",
+    "@semantic-release/npm": "7.0.5",
+    "@testing-library/react-hooks": "3.4.1",
+    "@types/jest": "26.0.9",
     "@types/react": "16.9.19",
-    "@types/react-native": ">=0.59.0",
-    "babel-eslint": "10.0.3",
-    "commitizen": "4.0.4",
-    "cz-conventional-changelog": "3.1.0",
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "6.10.0",
-    "eslint-plugin-prettier": "3.1.2",
-    "eslint-plugin-react": "7.18.3",
-    "eslint-plugin-react-hooks": "2.3.0",
+    "@types/react-native": "0.63.6",
+    "babel-eslint": "10.1.0",
+    "commitizen": "4.1.2",
+    "cz-conventional-changelog": "3.2.0",
+    "eslint": "7.6.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-react-native": "3.8.1",
     "husky": "4.2.5",
-    "jest": "25.1.0",
-    "prettier": "1.19.1",
-    "react": ">=16.8.3",
-    "react-native": ">=0.59.0",
-    "react-native-navigation": ">=6.5.0",
-    "react-test-renderer": "16.12.0",
-    "semantic-release": "17.0.3",
-    "typescript": "3.3.1"
+    "jest": "26.2.2",
+    "metro-react-native-babel-preset": "0.61.0",
+    "prettier": "2.0.5",
+    "react": "16.13.1",
+    "react-native": "0.63.2",
+    "react-native-navigation": "6.11.0",
+    "react-test-renderer": "16.13.1",
+    "semantic-release": "17.1.1",
+    "typescript": "3.9.7"
   },
   "release": {
     "branch": "master",
@@ -74,10 +69,7 @@
     ]
   },
   "jest": {
-    "preset": "react-native",
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
+    "preset": "react-native"
   },
   "husky": {
     "hooks": {
