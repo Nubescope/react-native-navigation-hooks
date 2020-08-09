@@ -23,11 +23,17 @@
     "react-native-navigation": ">=6.5.0"
   },
   "scripts": {
+    "build": "tsc",
+    "clean:dist": "rm -rf dist",
     "lint": "eslint src",
-    "build": "rm -rf ./dist && tsc",
+    "prebuild": "yarn clean:dist",
+    "prepare": "yarn build",
     "test": "jest src",
     "test:coverage": "jest --coverage",
     "release": "semantic-release"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "2.0.0",
@@ -35,6 +41,8 @@
     "@semantic-release/git": "9.0.0",
     "@semantic-release/npm": "7.0.5",
     "@testing-library/react-hooks": "3.4.1",
+    "@testing-library/react-native": "7.0.1",
+    "@types/hoist-non-react-statics": "3.3.1",
     "@types/jest": "26.0.9",
     "@types/react": "16.9.19",
     "@types/react-native": "0.63.6",
@@ -46,6 +54,7 @@
     "eslint-plugin-react-native": "3.8.1",
     "husky": "4.2.5",
     "jest": "26.2.2",
+    "lint-staged": "10.2.11",
     "metro-react-native-babel-preset": "0.61.0",
     "prettier": "2.0.5",
     "react": "16.13.1",
@@ -71,10 +80,14 @@
   "jest": {
     "preset": "react-native"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "yarn eslint"
+  },
   "husky": {
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-push": "yarn lint && yarn test"
+      "pre-commit": "yarn lint-staged && yarn test",
+      "pre-push": "yarn tsc && yarn lint --quiet && yarn test"
     }
   },
   "config": {

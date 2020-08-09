@@ -1,29 +1,29 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "allowSyntheticDefaultImports": false,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "alwaysStrict": true,
-    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
-    "diagnostics": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["es2017"],
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "dist",
-    "pretty": true,
-    "sourceMap": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
+    "sourceMap": true,
+    "sourceRoot": "src",
     "strict": true,
-    "target": "es5",
-    "types": ["react", "react-native", "react-native-navigation", "jest"]
+    "target": "es5"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "tests", "**/__tests__/**/*", "**/__stories__/**/*", "*.test.ts", "*.test.tsx"]
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
+  "include": ["src"]
 }
