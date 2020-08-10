@@ -1,1 +1,1 @@
-export { default as ComponentIdContext } from './ComponentIdContext'
+export { default as ComponentIdContext, ComponentIdProvider, ComponentIdConsumer } from './ComponentIdContext'
