@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import useNavigation from './useNavigation'
-import { ComponentIdProvider } from '../contexts/ComponentIdContext'
+import { NavigationProvider } from '../contexts/NavigationContext'
 import * as createNavigationHelpers from '../helpers/createNavigationHelpers'
 
 const navigationHelperKeys = Object.keys(createNavigationHelpers.default('test'))
@@ -13,7 +13,10 @@ describe('useNavigation', () => {
 
   it('should return helpers based on componentId retrieved from CompoenentIdProvider', () => {
     jest.spyOn(createNavigationHelpers, 'default')
-    const wrapper = ({ children }) => <ComponentIdProvider value="componentId">{children}</ComponentIdProvider>
+
+    const wrapper = ({ children }) => (
+      <NavigationProvider value={{ componentId: 'componentId' }}>{children}</NavigationProvider>
+    )
 
     const { result, unmount } = renderHook(() => useNavigation(), { wrapper })
 
@@ -38,7 +41,7 @@ describe('useNavigation', () => {
     expect(result.error).toBeUndefined()
   })
 
-  it('should throw when not using ComponentIdProvider nor componentId as argument', () => {
+  it('should throw when not using NavigationProvider nor componentId as argument', () => {
     const { result, unmount } = renderHook(() => useNavigation())
 
     unmount()

@@ -1,1 +1,1 @@
-export { default as withComponentIdProvider } from './withComponentIdProvider'
+export { default as withNavigationProvider } from './withNavigationProvider'

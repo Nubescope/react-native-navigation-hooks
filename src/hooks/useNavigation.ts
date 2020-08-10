@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useMemo, useContext } from 'react'
 import createNavigationHelpers from '../helpers/createNavigationHelpers'
-import useComponentId from './useComponentId'
+import { NavigationContext } from '../contexts'
 
 /**
  * Returns a set of action helpers for
@@ -8,7 +8,7 @@ import useComponentId from './useComponentId'
  * [root](https://wix.github.io/react-native-navigation/api/root),
  * [stack](https://wix.github.io/react-native-navigation/api/stack),
  * [modal](https://wix.github.io/react-native-navigation/api/modal),
- * [overlay](https://wix.github.io/react-native-navigation/api/overlay)
+ * [overlay](https://wix.github.io/react-natwive-navigation/api/overlay)
  * Navigation API
  */
 const useNavigation = (
@@ -17,12 +17,11 @@ const useNavigation = (
    */
   componentId?: string
 ) => {
-  const componentIdFromProvider = useComponentId()
-
-  const id = componentId || componentIdFromProvider
+  const { componentId: componentIdFromContext } = useContext(NavigationContext)
+  const id = componentId || componentIdFromContext
 
   if (!id) {
-    throw new Error('Missing componentId. Use ComponentIdContext or pass componentId as argument.')
+    throw new Error('Missing componentId. Use NavigationContext or pass componentId as argument.')
   }
 
   return useMemo(() => createNavigationHelpers(id), [id])

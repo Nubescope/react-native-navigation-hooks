@@ -1,20 +1,20 @@
 import React from 'react'
 import { render, cleanup } from '@testing-library/react-native'
-import withComponentIdProvider from './withComponentIdProvider'
+import withNavigationProvider from './withNavigationProvider'
 import { View } from 'react-native'
-import { ComponentIdConsumer } from '../contexts/ComponentIdContext'
+import { NavigationConsumer } from '../contexts/NavigationContext'
 
-describe('withComponentIdProvider', () => {
+describe('withNavigationProvider', () => {
   afterEach(cleanup)
 
-  it('should wrap compenent with ComponentIdProvider and bypass props', () => {
+  it('should wrap compenent with NavigationProvider and bypass props', () => {
     const Component = ({ componentId, prop1 }) => (
       <View testID={`root-${componentId}`}>
-        <ComponentIdConsumer>{id => <View testID={`with-${id}-${prop1}`} />}</ComponentIdConsumer>
+        <NavigationConsumer>{({ componentId: id }) => <View testID={`with-${id}-${prop1}`} />}</NavigationConsumer>
       </View>
     )
 
-    const WrappedComponent = withComponentIdProvider(Component)
+    const WrappedComponent = withNavigationProvider(Component)
 
     const { getByTestId } = render(<WrappedComponent componentId="id" prop1="value1" />)
 
