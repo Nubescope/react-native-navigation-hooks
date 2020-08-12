@@ -15,7 +15,7 @@ describe('useNavigationModalDismiss', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerModalDismissedListener: jest.fn(callback => {
+      registerModalDismissedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

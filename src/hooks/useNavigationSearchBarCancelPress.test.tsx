@@ -15,7 +15,7 @@ describe('useNavigationSearchBarCancelPress', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerSearchBarCancelPressedListener: jest.fn(callback => {
+      registerSearchBarCancelPressedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

@@ -69,7 +69,7 @@ function useNavigationButtonPress(
   warnIfMissingComponentId('useNavigationButtonPress', componentId, global)
 
   useLayoutEffect(() => {
-    const subscription = Navigation.events().registerNavigationButtonPressedListener(event => {
+    const subscription = Navigation.events().registerNavigationButtonPressedListener((event) => {
       if (buttonId && event.buttonId !== buttonId) {
         return
       }

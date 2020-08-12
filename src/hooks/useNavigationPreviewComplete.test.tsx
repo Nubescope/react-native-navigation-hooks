@@ -15,7 +15,7 @@ describe('useNavigationPreviewComplete', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerPreviewCompletedListener: jest.fn(callback => {
+      registerPreviewCompletedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

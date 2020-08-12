@@ -15,7 +15,7 @@ describe('useNavigationScreenPop', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerScreenPoppedListener: jest.fn(callback => {
+      registerScreenPoppedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

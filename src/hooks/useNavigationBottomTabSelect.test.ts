@@ -12,7 +12,7 @@ describe('useNavigationBottomTabSelect', () => {
     mockRemoveSubscription = jest.fn()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerBottomTabSelectedListener: jest.fn(callback => {
+      registerBottomTabSelectedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

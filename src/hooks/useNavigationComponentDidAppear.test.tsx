@@ -16,7 +16,7 @@ describe('useNavigationComponentDidAppear', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerComponentDidAppearListener: jest.fn(callback => {
+      registerComponentDidAppearListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

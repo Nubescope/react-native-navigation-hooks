@@ -15,7 +15,7 @@ describe('useNavigationButtonPress', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerNavigationButtonPressedListener: jest.fn(callback => {
+      registerNavigationButtonPressedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

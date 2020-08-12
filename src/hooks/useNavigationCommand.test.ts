@@ -12,7 +12,7 @@ describe('useNavigationCommand', () => {
     mockRemoveSubscription = jest.fn()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerCommandListener: jest.fn(callback => {
+      registerCommandListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

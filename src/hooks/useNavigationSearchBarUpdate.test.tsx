@@ -15,7 +15,7 @@ describe('useNavigationSearchBarUpdate', () => {
     jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerSearchBarUpdatedListener: jest.fn(callback => {
+      registerSearchBarUpdatedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }

@@ -12,7 +12,7 @@ describe('useNavigationBottomTabLongPress', () => {
     mockRemoveSubscription = jest.fn()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerBottomTabLongPressedListener: jest.fn(callback => {
+      registerBottomTabLongPressedListener: jest.fn((callback) => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }
