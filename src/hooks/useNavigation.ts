@@ -1,6 +1,6 @@
 import { useMemo, useContext } from 'react'
 import { NavigationContext } from '../contexts'
-import createNavigationHelpers from '../helpers/createNavigationHelpers'
+import createNavigationCommands from '../helpers/createNavigationCommands'
 
 /**
  * Returns a set of action helpers for
@@ -23,7 +23,7 @@ const useNavigation = (
     throw new Error('Missing "componentId". Use NavigationContext or pass "componentId" as argument.')
   }
 
-  return useMemo(() => createNavigationHelpers(id), [id])
+  return useMemo(() => createNavigationCommands(id), [id])
 }
 
 export default useNavigation

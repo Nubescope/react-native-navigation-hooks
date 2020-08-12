@@ -1,4 +1,4 @@
-import { EventsRegistry, Layout, LayoutRoot, LayoutStackChildren, Navigation, Options } from 'react-native-navigation'
+import { Layout, LayoutRoot, Navigation, Options } from 'react-native-navigation'
 import createLayout from './createLayout'
 
 interface SetRootCommand {
@@ -13,7 +13,7 @@ interface SetStackRootCommand {
 }
 
 interface PushCommand {
-  <P = {}>(name: Layout<P>): Promise<any>
+  <P = {}>(layout: Layout<P>): Promise<any>
   (name: string): Promise<any>
   <P = {}>(name: string, passProps?: P): Promise<any>
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
@@ -24,25 +24,16 @@ interface ShowModalCommand {
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
 }
 
-interface ShowModalStackCommand {
-  (layoutStackChildren: LayoutStackChildren): Promise<any>
-  (layoutStackChildren: LayoutStackChildren[]): Promise<any>
-  (name: string): Promise<any>
-  <P = {}>(name: string, passProps?: P): Promise<any>
-  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
-}
-
 interface ShowOverlayCommand {
   (layout: Layout): Promise<any>
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
 }
 
-export type NavigationHelpers = {
+export type NavigationCommands = {
   setRoot: SetRootCommand
   setStackRoot: SetStackRootCommand
   push: PushCommand
   showModal: ShowModalCommand
-  showModalStack: ShowModalStackCommand
   showOverlay: ShowOverlayCommand
   mergeOptions: (options: Options) => void
   updateProps: (props: object) => void
@@ -51,9 +42,9 @@ export type NavigationHelpers = {
   popTo: (mergeOptions?: Options) => Promise<any>
   popToRoot: (mergeOptions?: Options) => Promise<any>
   dismissOverlay: () => Promise<any>
+  setDefaultOptions: (options: Options) => void
   dismissAllModals: (mergeOptions?: Options) => Promise<any>
   getLaunchArgs: () => Promise<any>
-  events: () => EventsRegistry
 }
 
 /**
@@ -63,14 +54,14 @@ export type NavigationHelpers = {
  * [stack](https://wix.github.io/react-native-navigation/api/stack),
  * [modal](https://wix.github.io/react-native-navigation/api/modal),
  * [overlay](https://wix.github.io/react-native-navigation/api/overlay)
- * Navigation API
+ * Navigation API exposing multiple function types for the each function as a list of overloads.
  */
-function createRnnHelpers(
+function createNavigationCommands(
   /**
    * Component reference id. Used to give context to the Navigation functions that requires componentId parameter.
    */
   componentId: string
-): NavigationHelpers {
+): NavigationCommands {
   function setRoot<P = {}>(nameOrLayout: string | Layout | LayoutRoot, passProps?: P, options?: Options) {
     let layoutRoot
 
@@ -101,25 +92,6 @@ function createRnnHelpers(
     const layout = typeof nameOrLayout === 'string' ? createLayout<P>(nameOrLayout, passProps, options) : nameOrLayout
 
     return Navigation.showModal(layout)
-  }
-
-  function showModalStack<P = {}>(
-    nameOrLayoutStackChildren: string | LayoutStackChildren | LayoutStackChildren[],
-    passProps?: P,
-    options?: Options
-  ) {
-    let layoutStackChildren
-
-    if (typeof nameOrLayoutStackChildren === 'string') {
-      const layoutComponent = createLayout<P>(nameOrLayoutStackChildren, passProps, options) as LayoutStackChildren
-      layoutStackChildren = [layoutComponent]
-    } else {
-      layoutStackChildren = Array.isArray(nameOrLayoutStackChildren)
-        ? nameOrLayoutStackChildren
-        : [nameOrLayoutStackChildren]
-    }
-
-    return Navigation.showModal({ stack: { children: layoutStackChildren } })
   }
 
   function showOverlay<P = {}>(nameOrLayout: string | Layout<P>, passProps?: P, options?: Options) {
@@ -160,14 +132,13 @@ function createRnnHelpers(
     return Navigation.dismissOverlay(componentId)
   }
 
-  const { getLaunchArgs, events, dismissAllModals } = Navigation
+  const { setDefaultOptions, dismissAllModals, getLaunchArgs } = Navigation
 
   return {
     setRoot,
     setStackRoot,
     push,
     showModal,
-    showModalStack,
     showOverlay,
     mergeOptions,
     updateProps,
@@ -176,10 +147,10 @@ function createRnnHelpers(
     popTo,
     popToRoot,
     dismissOverlay,
+    setDefaultOptions,
     dismissAllModals,
     getLaunchArgs,
-    events,
   }
 }
 
-export default createRnnHelpers
+export default createNavigationCommands

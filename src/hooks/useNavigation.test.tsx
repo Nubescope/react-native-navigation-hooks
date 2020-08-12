@@ -2,9 +2,9 @@ import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import useNavigation from './useNavigation'
 import { NavigationProvider } from '../contexts/NavigationContext'
-import * as createNavigationHelpers from '../helpers/createNavigationHelpers'
+import * as createNavigationCommands from '../helpers/createNavigationCommands'
 
-const navigationHelperKeys = Object.keys(createNavigationHelpers.default('test'))
+const navigationCommandKeys = Object.keys(createNavigationCommands.default('test'))
 
 describe('useNavigation', () => {
   afterEach(() => {
@@ -12,7 +12,7 @@ describe('useNavigation', () => {
   })
 
   it('should return helpers based on componentId retrieved from CompoenentIdProvider', () => {
-    jest.spyOn(createNavigationHelpers, 'default')
+    jest.spyOn(createNavigationCommands, 'default')
 
     const wrapper = ({ children }) => (
       <NavigationProvider value={{ componentId: 'componentId' }}>{children}</NavigationProvider>
@@ -22,22 +22,22 @@ describe('useNavigation', () => {
 
     unmount()
 
-    expect(createNavigationHelpers.default).toHaveBeenCalledWith('componentId')
+    expect(createNavigationCommands.default).toHaveBeenCalledWith('componentId')
 
-    expect(Object.keys(result.current)).toEqual(navigationHelperKeys)
+    expect(Object.keys(result.current)).toEqual(navigationCommandKeys)
     expect(result.error).toBeUndefined()
   })
 
   it('should return helpers based on componentId retrieved from hook argument', () => {
-    jest.spyOn(createNavigationHelpers, 'default')
+    jest.spyOn(createNavigationCommands, 'default')
 
     const { result, unmount } = renderHook(() => useNavigation('componentId'))
 
     unmount()
 
-    expect(createNavigationHelpers.default).toHaveBeenCalledWith('componentId')
+    expect(createNavigationCommands.default).toHaveBeenCalledWith('componentId')
 
-    expect(Object.keys(result.current)).toEqual(navigationHelperKeys)
+    expect(Object.keys(result.current)).toEqual(navigationCommandKeys)
     expect(result.error).toBeUndefined()
   })
 

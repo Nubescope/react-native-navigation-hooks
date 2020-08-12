@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation'
-import createNavigationHelpers from './createNavigationHelpers'
+import createNavigationCommands from './createNavigationCommands'
 
 jest.mock('react-native-navigation', () => ({
   Navigation: {
@@ -16,14 +16,14 @@ jest.mock('react-native-navigation', () => ({
     popToRoot: jest.fn(),
     dismissOverlay: jest.fn(),
     getLaunchArgs: jest.fn(),
-    events: jest.fn(),
+    setDefaultOptions: jest.fn(),
     dismissAllModals: jest.fn(),
   },
 }))
 
-describe('createNavigationHelpers', () => {
+describe('createNavigationCommands', () => {
   describe('setRoot', () => {
-    const { setRoot } = createNavigationHelpers('componentId')
+    const { setRoot } = createNavigationCommands('componentId')
 
     it('should call Navigation.setRoot using name', async () => {
       await setRoot('componentName')
@@ -113,7 +113,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('setStackRoot', () => {
-    const { setStackRoot } = createNavigationHelpers('componentId')
+    const { setStackRoot } = createNavigationCommands('componentId')
 
     it('should call Navigation.setStackRoot using name', async () => {
       await setStackRoot('componentName')
@@ -175,7 +175,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('push', () => {
-    const { push } = createNavigationHelpers('componentId')
+    const { push } = createNavigationCommands('componentId')
 
     it('should call Navigation.push using name', async () => {
       await push('componentName')
@@ -237,7 +237,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('showModal', () => {
-    const { showModal } = createNavigationHelpers('componentId')
+    const { showModal } = createNavigationCommands('componentId')
 
     it('should call Navigation.showModal using name', async () => {
       await showModal('componentName')
@@ -298,126 +298,8 @@ describe('createNavigationHelpers', () => {
     })
   })
 
-  describe('showModalStack', () => {
-    const { showModalStack } = createNavigationHelpers('componentId')
-
-    it('should call Navigation.showModal using name', async () => {
-      await showModalStack('componentName')
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'componentName',
-              },
-            },
-          ],
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name and passProps', async () => {
-      await showModalStack('componentName', { prop1: 'value1' })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'componentName',
-                passProps: { prop1: 'value1' },
-              },
-            },
-          ],
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name, passProps and options', async () => {
-      await showModalStack('componentName', { prop1: 'value1' }, { popGesture: true })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'componentName',
-                passProps: { prop1: 'value1' },
-                options: { popGesture: true },
-              },
-            },
-          ],
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name and options', async () => {
-      await showModalStack('componentName', undefined, { popGesture: true })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'componentName',
-                options: { popGesture: true },
-              },
-            },
-          ],
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using a LayoutStackChildren', async () => {
-      await showModalStack({
-        component: { name: 'componentName' },
-        externalComponent: { name: 'externalComponentName' },
-      })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: { name: 'componentName' },
-              externalComponent: { name: 'externalComponentName' },
-            },
-          ],
-        },
-      })
-    })
-
-    it('should call Navigation.showModal when LayoutStackChildren[] provided', async () => {
-      await showModalStack([
-        {
-          component: { name: 'component1' },
-          externalComponent: { name: 'externalComponentName1' },
-        },
-        {
-          component: { name: 'component2' },
-          externalComponent: { name: 'externalComponentName2' },
-        },
-      ])
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        stack: {
-          children: [
-            {
-              component: { name: 'component1' },
-              externalComponent: { name: 'externalComponentName1' },
-            },
-            {
-              component: { name: 'component2' },
-              externalComponent: { name: 'externalComponentName2' },
-            },
-          ],
-        },
-      })
-    })
-  })
-
   describe('showOverlay', () => {
-    const { showOverlay } = createNavigationHelpers('componentId')
+    const { showOverlay } = createNavigationCommands('componentId')
 
     it('should call Navigation.showOverlay using name', async () => {
       await showOverlay('componentName')
@@ -479,7 +361,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('mergeOptions', () => {
-    const { mergeOptions } = createNavigationHelpers('componentId')
+    const { mergeOptions } = createNavigationCommands('componentId')
 
     it('should call Navigation.mergeOptions with componentId', () => {
       mergeOptions({ popGesture: true })
@@ -489,7 +371,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('updateProps', () => {
-    const { updateProps } = createNavigationHelpers('componentId')
+    const { updateProps } = createNavigationCommands('componentId')
 
     it('should call Navigation.updateProps with componentId', () => {
       updateProps({ prop1: 'value1' })
@@ -499,7 +381,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('dismissModal', () => {
-    const { dismissModal } = createNavigationHelpers('componentId')
+    const { dismissModal } = createNavigationCommands('componentId')
 
     it('should call Navigation.dismissModal with componentId', async () => {
       await dismissModal()
@@ -521,7 +403,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('pop', () => {
-    const { pop } = createNavigationHelpers('componentId')
+    const { pop } = createNavigationCommands('componentId')
 
     it('should call Navigation.pop with componentId', async () => {
       await pop()
@@ -537,7 +419,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('popTo', () => {
-    const { popTo } = createNavigationHelpers('componentId')
+    const { popTo } = createNavigationCommands('componentId')
 
     it('should call Navigation.popTo with componentId', async () => {
       await popTo()
@@ -553,7 +435,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('popToRoot', () => {
-    const { popToRoot } = createNavigationHelpers('componentId')
+    const { popToRoot } = createNavigationCommands('componentId')
 
     it('should call Navigation.popToRoot with componentId', async () => {
       await popToRoot()
@@ -569,7 +451,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('dismissOverlay', () => {
-    const { dismissOverlay } = createNavigationHelpers('componentId')
+    const { dismissOverlay } = createNavigationCommands('componentId')
 
     it('should call Navigation.dismissOverlay with componentId', async () => {
       await dismissOverlay()
@@ -579,17 +461,17 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('events', () => {
-    const { events } = createNavigationHelpers('componentId')
+    const { setDefaultOptions } = createNavigationCommands('componentId')
 
-    it('should return Navigation.events function as is', () => {
-      events()
+    it('should return Navigation.setDefaultOptions function as is', () => {
+      setDefaultOptions({})
 
-      expect(Navigation.events).toHaveBeenCalled()
+      expect(Navigation.setDefaultOptions).toHaveBeenCalledWith({})
     })
   })
 
   describe('getLaunchArgs', () => {
-    const { getLaunchArgs } = createNavigationHelpers('componentId')
+    const { getLaunchArgs } = createNavigationCommands('componentId')
 
     it('should return Navigation.getLaunchArgs function as is', async () => {
       await getLaunchArgs()
@@ -599,7 +481,7 @@ describe('createNavigationHelpers', () => {
   })
 
   describe('dismissAllModals', () => {
-    const { dismissAllModals } = createNavigationHelpers('componentId')
+    const { dismissAllModals } = createNavigationCommands('componentId')
 
     it('should return Navigation.dismissAllModals function as is', async () => {
       await dismissAllModals()
