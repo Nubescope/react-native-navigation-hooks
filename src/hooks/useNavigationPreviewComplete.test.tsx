@@ -1,6 +1,8 @@
+import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { Navigation, PreviewCompletedEvent } from 'react-native-navigation'
 import useNavigationPreviewComplete from './useNavigationPreviewComplete'
+import { NavigationProvider } from '../contexts/NavigationContext'
 
 describe('useNavigationPreviewComplete', () => {
   let triggerEvent: (event: PreviewCompletedEvent) => void
@@ -10,6 +12,7 @@ describe('useNavigationPreviewComplete', () => {
   beforeEach(() => {
     mockHandler = jest.fn(() => {})
     mockRemoveSubscription = jest.fn()
+    jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
       registerPreviewCompletedListener: jest.fn(callback => {
@@ -19,6 +22,8 @@ describe('useNavigationPreviewComplete', () => {
       }),
     })
   })
+
+  afterEach(jest.clearAllMocks)
 
   it('should remove the event listener on unmount', () => {
     const { result, unmount } = renderHook(() => {
@@ -31,6 +36,7 @@ describe('useNavigationPreviewComplete', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should never call the handler if no event was triggered', () => {
@@ -42,6 +48,7 @@ describe('useNavigationPreviewComplete', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler twice when componentId is not provided', () => {
@@ -69,6 +76,7 @@ describe('useNavigationPreviewComplete', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler once if componentId provided', () => {
@@ -88,6 +96,34 @@ describe('useNavigationPreviewComplete', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
+  })
+
+  it('should call handler once if componentId matches by context', () => {
+    const wrapper = ({ children }) => (
+      <NavigationProvider value={{ componentId: 'COMPONENT_ID_1' }}>{children}</NavigationProvider>
+    )
+
+    const { result } = renderHook(
+      () => {
+        useNavigationPreviewComplete(mockHandler, 'COMPONENT_ID_1')
+      },
+      { wrapper }
+    )
+
+    const event = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      previewComponentId: 'PREVIEW_COMPONENT_ID_1',
+    }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 
   it('should never call the handler if componentId does not match', () => {
@@ -106,5 +142,6 @@ describe('useNavigationPreviewComplete', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 })

@@ -20,6 +20,8 @@ describe('useNavigationCommand', () => {
     })
   })
 
+  afterEach(jest.clearAllMocks)
+
   it('should remove the event listener on unmount', () => {
     const { result, unmount } = renderHook(() => {
       useNavigationCommand(() => {})

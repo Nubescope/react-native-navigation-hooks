@@ -1,6 +1,8 @@
+import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { Navigation, SearchBarUpdatedEvent } from 'react-native-navigation'
 import useNavigationSearchBarUpdate from './useNavigationSearchBarUpdate'
+import { NavigationProvider } from '../contexts/NavigationContext'
 
 describe('useNavigationSearchBarUpdate', () => {
   let triggerEvent: (event: SearchBarUpdatedEvent) => void
@@ -10,6 +12,7 @@ describe('useNavigationSearchBarUpdate', () => {
   beforeEach(() => {
     mockHandler = jest.fn(() => {})
     mockRemoveSubscription = jest.fn()
+    jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
       registerSearchBarUpdatedListener: jest.fn(callback => {
@@ -19,6 +22,8 @@ describe('useNavigationSearchBarUpdate', () => {
       }),
     })
   })
+
+  afterEach(jest.clearAllMocks)
 
   it('should remove the event listener on unmount', () => {
     const { result, unmount } = renderHook(() => {
@@ -31,6 +36,7 @@ describe('useNavigationSearchBarUpdate', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should never call the handler if no event was triggered', () => {
@@ -42,6 +48,7 @@ describe('useNavigationSearchBarUpdate', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler twice when componentId is not provided', () => {
@@ -61,6 +68,7 @@ describe('useNavigationSearchBarUpdate', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler once if componentId provided', () => {
@@ -76,6 +84,46 @@ describe('useNavigationSearchBarUpdate', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
+  })
+
+  it('should call handler once if componentId provided by options', () => {
+    const { result } = renderHook(() => {
+      useNavigationSearchBarUpdate(mockHandler, { componentId: 'COMPONENT_ID_1' })
+    })
+
+    const event = { componentId: 'COMPONENT_ID_1', text: 'TEXT_1', isFocused: true }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
+  })
+
+  it('should call handler once if componentId matches by context', () => {
+    const wrapper = ({ children }) => (
+      <NavigationProvider value={{ componentId: 'COMPONENT_ID_1' }}>{children}</NavigationProvider>
+    )
+
+    const { result } = renderHook(
+      () => {
+        useNavigationSearchBarUpdate(mockHandler)
+      },
+      { wrapper }
+    )
+
+    const event = { componentId: 'COMPONENT_ID_1', text: 'TEXT_1', isFocused: true }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 
   it('should never call the handler if componentId does not match', () => {
@@ -90,5 +138,6 @@ describe('useNavigationSearchBarUpdate', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 })

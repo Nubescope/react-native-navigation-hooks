@@ -1,9 +1,11 @@
+import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
-import { Navigation, ComponentDidAppearEvent, ComponentType } from 'react-native-navigation'
-import useNavigationComponentDidAppear from './useNavigationComponentDidAppear'
+import { Navigation, ComponentDidDisappearEvent, ComponentType } from 'react-native-navigation'
+import useNavigationComponentDidDisappear from './useNavigationComponentDidDisappear'
+import { NavigationProvider } from '../contexts/NavigationContext'
 
-describe('useNavigationComponentDidAppear', () => {
-  let triggerEvent: (event: ComponentDidAppearEvent) => void
+describe('useNavigationComponentDidDisappear', () => {
+  let triggerEvent: (event: ComponentDidDisappearEvent) => void
   let mockRemoveSubscription: () => void
   let mockHandler: () => void
   let mockComponentType: ComponentType = 'Component'
@@ -11,9 +13,10 @@ describe('useNavigationComponentDidAppear', () => {
   beforeEach(() => {
     mockHandler = jest.fn(() => {})
     mockRemoveSubscription = jest.fn()
+    jest.spyOn(console, 'warn').mockReturnValue()
 
     Navigation.events = jest.fn().mockReturnValue({
-      registerComponentDidAppearListener: jest.fn(callback => {
+      registerComponentDidDisappearListener: jest.fn(callback => {
         triggerEvent = callback
 
         return { remove: mockRemoveSubscription }
@@ -21,33 +24,37 @@ describe('useNavigationComponentDidAppear', () => {
     })
   })
 
+  afterEach(jest.clearAllMocks)
+
   it('should remove the event listener on unmount', () => {
     const { result, unmount } = renderHook(() => {
-      useNavigationComponentDidAppear(() => {})
+      useNavigationComponentDidDisappear(() => {})
     })
 
     unmount()
 
-    expect(mockRemoveSubscription).toHaveBeenCalledTimes(1)
+    expect(mockRemoveSubscription).toBeCalledTimes(1)
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should never call the handler if no event was triggered', () => {
     const { result } = renderHook(() => {
-      useNavigationComponentDidAppear(() => {})
+      useNavigationComponentDidDisappear(() => {})
     })
 
     expect(mockHandler).toBeCalledTimes(0)
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler twice when componentId is not provided', () => {
     const { result } = renderHook(() => {
-      useNavigationComponentDidAppear(mockHandler)
+      useNavigationComponentDidDisappear(mockHandler)
     })
 
     const event1 = {
@@ -56,7 +63,6 @@ describe('useNavigationComponentDidAppear', () => {
       componentType: mockComponentType,
       passProps: {},
     }
-
     triggerEvent(event1)
 
     const event2 = {
@@ -73,11 +79,12 @@ describe('useNavigationComponentDidAppear', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('should call handler once if componentId provided', () => {
     const { result } = renderHook(() => {
-      useNavigationComponentDidAppear(mockHandler, 'COMPONENT_ID_1')
+      useNavigationComponentDidDisappear(mockHandler, 'COMPONENT_ID_1')
     })
 
     const event = {
@@ -93,11 +100,61 @@ describe('useNavigationComponentDidAppear', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
+  })
+
+  it('should call handler once if componentId provided by options', () => {
+    const { result } = renderHook(() => {
+      useNavigationComponentDidDisappear(mockHandler, { componentId: 'COMPONENT_ID_1' })
+    })
+
+    const event = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
+  })
+
+  it('should call handler once if componentId matches by context', () => {
+    const wrapper = ({ children }) => (
+      <NavigationProvider value={{ componentId: 'COMPONENT_ID_1' }}>{children}</NavigationProvider>
+    )
+
+    const { result } = renderHook(
+      () => {
+        useNavigationComponentDidDisappear(mockHandler, 'COMPONENT_ID_1')
+      },
+      { wrapper }
+    )
+
+    const event = {
+      componentId: 'COMPONENT_ID_1',
+      componentName: 'COMPONENT_NAME_1',
+      componentType: mockComponentType,
+      passProps: {},
+    }
+    triggerEvent(event)
+
+    expect(mockHandler).toBeCalledTimes(1)
+    expect(mockHandler).toBeCalledWith(event)
+
+    expect(result.current).toBeUndefined()
+    expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 
   it('should never call the handler if componentId does not match', () => {
     const { result } = renderHook(() => {
-      useNavigationComponentDidAppear(mockHandler, 'COMPONENT_ID_1')
+      useNavigationComponentDidDisappear(mockHandler, 'COMPONENT_ID_1')
     })
 
     const event = {
@@ -112,5 +169,6 @@ describe('useNavigationComponentDidAppear', () => {
 
     expect(result.current).toBeUndefined()
     expect(result.error).toBeUndefined()
+    expect(console.warn).not.toBeCalled()
   })
 })

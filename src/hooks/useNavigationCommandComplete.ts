@@ -10,18 +10,16 @@ function useNavigationCommandComplete(
   /**
    * Function called each time the event is triggered.
    */
-  handler: (event: CommandCompletedEvent) => void,
+  handler: (event: CommandCompletedEvent) => any,
 
   /**
    * Name of the executed navegation command. Ex. "push".
    */
   commandName?: string
-) {
+): void {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerCommandCompletedListener((event: CommandCompletedEvent) => {
-      const equalCommandName = event.commandName === commandName
-
-      if (commandName && !equalCommandName) {
+      if (commandName && event.commandName !== commandName) {
         return
       }
 

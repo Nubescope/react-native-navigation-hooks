@@ -9,7 +9,7 @@ function useNavigationCommand(
   /**
    * Function called each time the event is triggered.
    */
-  handler: (name: string, params: any) => void,
+  handler: (name: string, params: any) => any,
 
   /**
    * Component reference id. If provided it listens for event only for this screen.
@@ -18,9 +18,7 @@ function useNavigationCommand(
 ) {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerCommandListener((name: string, params: any) => {
-      const equalCommandName = name === commandName
-
-      if (commandName && !equalCommandName) {
+      if (commandName && name !== commandName) {
         return
       }
 

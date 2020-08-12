@@ -9,8 +9,8 @@ function useNavigationBottomTabLongPress(
   /**
    * Function called each time the event is triggered.
    */
-  handler: (event: BottomTabLongPressedEvent) => void
-) {
+  handler: (event: BottomTabLongPressedEvent) => any
+): void {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerBottomTabLongPressedListener(handler)
 

@@ -1,6 +1,6 @@
 import { useMemo, useContext } from 'react'
-import createNavigationHelpers from '../helpers/createNavigationHelpers'
 import { NavigationContext } from '../contexts'
+import createNavigationHelpers from '../helpers/createNavigationHelpers'
 
 /**
  * Returns a set of action helpers for
@@ -17,11 +17,10 @@ const useNavigation = (
    */
   componentId?: string
 ) => {
-  const { componentId: componentIdFromContext } = useContext(NavigationContext)
-  const id = componentId || componentIdFromContext
+  const { componentId: id = componentId } = useContext(NavigationContext)
 
   if (!id) {
-    throw new Error('Missing componentId. Use NavigationContext or pass componentId as argument.')
+    throw new Error('Missing "componentId". Use NavigationContext or pass "componentId" as argument.')
   }
 
   return useMemo(() => createNavigationHelpers(id), [id])

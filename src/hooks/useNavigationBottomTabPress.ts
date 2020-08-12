@@ -9,8 +9,8 @@ function useNavigationBottomTabPress(
   /**
    * Function called each time the event is triggered.
    */
-  handler: (event: BottomTabPressedEvent) => void
-) {
+  handler: (event: BottomTabPressedEvent) => any
+): void {
   useLayoutEffect(() => {
     const subscription = Navigation.events().registerBottomTabPressedListener(handler)
 

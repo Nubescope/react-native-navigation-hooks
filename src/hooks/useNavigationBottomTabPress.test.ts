@@ -20,6 +20,8 @@ describe('useNavigationBottomTabPress', () => {
     })
   })
 
+  afterEach(jest.clearAllMocks)
+
   it('should remove the event listener on unmount', () => {
     const { result, unmount } = renderHook(() => {
       useNavigationBottomTabPress(() => {})
