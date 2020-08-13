@@ -527,7 +527,7 @@ Checkout the tests [here](./src/helpers/createLayout.test.ts)
 
 ### `createStack`
 
-An overlodaded helper function to generate a `LayoutStack` object shape
+An overloaded helper function to generate a `LayoutStack` object shape
 
 ```ts
 function createStack(layoutStackChildren: LayoutStackChildren, id?: string, options?: Options): LayoutStack
