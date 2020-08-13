@@ -43,7 +43,7 @@ You can take advantage of the [withNavigationProvider](#withNavigationProvider) 
 
 ```tsx
 import { Navigation } from 'react-native-navigation'
-import { ComponentIdContext } from 'react-native-navigation-hooks'
+import { withNavigationProvider, NavigationProvider } from 'react-native-navigation-hooks'
 
 Navigation.registerComponent('MyScreenComponent', () => withNavigationProvider(MyScreenComponent))
 
@@ -111,7 +111,8 @@ Called each time this component appears on screen (attached to the view hierarch
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationComponentDidAppear((e) => {
     console.log(`${e.componentName} appeared`)
   })
@@ -144,7 +145,8 @@ Called each time this component disappears from screen (detached from the view h
 import { useNavigationComponentDidDisappear } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationComponentDidDisappear((e) => {
     console.log(`${e.componentName} appeared`)
   })
@@ -221,7 +223,8 @@ Invoked only on iOS pageSheet modal when swipeToDismiss flag is set to true and 
 import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationModalAttemptedToDismiss((e) => {
     console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
   })
@@ -254,7 +257,8 @@ Invoked when modal dismissed. [more info](https://wix.github.io/react-native-nav
 import { useNavigationModalDismiss } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationModalDismiss((e) => {
     console.log(`Modals dismissed: ${e.modalsDismissed} on componentId: ${e.componentId}`)
   })
@@ -287,7 +291,8 @@ Invoked when screen is popped. [more info](https://wix.github.io/react-native-na
 import { useNavigationScreenPop } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationScreenPop((e) => {
     console.log(`Screen was popped on componentId: ${e.componentId}`)
   })
@@ -412,7 +417,8 @@ Called when a SearchBar from NavigationBar gets updated. [more info](https://wix
 import { useNavigationSearchBarUpdate } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationSearchBarUpdate((e) => {
     console.log(`Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on this screen`)
   })
@@ -447,7 +453,8 @@ Called when the cancel button on the SearchBar from NavigationBar gets pressed. 
 import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationSearchBarCancelPress((e) => {
     console.log('Seach bar cancel button pressed on this screen')
   })
@@ -480,7 +487,8 @@ Called when preview peek is completed. [more info](https://wix.github.io/react-n
 import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
-  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
+  // Listen events only for this screen when using withNavigation HOC or <NavigationProvider>
+  // (if neither of those are provided it will warn you at least you provide a `{ global: true }` option)
   useNavigationPreviewComplete((e) => {
     console.log(`Preview component ${e.previewComponentId} shown on this screen`)
   })
