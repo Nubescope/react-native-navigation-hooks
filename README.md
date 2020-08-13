@@ -520,7 +520,7 @@ const ScreenComponent = ({ componentId }) => {
 A helper function to generate a `Layout` object shape
 
 ```ts
-function createStack<P = {}>(name: string, passProps?: P, options?: Options): Layout
+function createLayout<P = {}>(name: string, passProps?: P, options?: Options): Layout
 ```
 
 Checkout the tests [here](./src/helpers/createLayout.test.ts)
