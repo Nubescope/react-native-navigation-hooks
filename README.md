@@ -42,11 +42,12 @@ In order to use this hook your screens must use the `<NavigationProvider>` to pa
 You can take advantage of the [withNavigationProvider](#withNavigationProvider) or you could also use the `<NavigationProvider>` manually.
 
 ```tsx
+import { Navigation } from 'react-native-navigation'
+import { ComponentIdContext } from 'react-native-navigation-hooks'
+
 Navigation.registerComponent('MyScreenComponent', () => withNavigationProvider(MyScreenComponent))
 
 // or
-
-import { ComponentIdContext } from 'react-native-navigation-hooks'
 
 Navigation.registerComponent(
   'MyScreenComponent',
@@ -100,7 +101,7 @@ const MyScreen = () => {
 }
 ```
 
-You can check the list of the supported methods and the arguments overload [here](./src/helpers/createNavigationHelpers.ts).
+You can check the list of the supported methods and the arguments overload [here](./src/helpers/createNavigationCommands.ts).
 
 ### `useNavigationComponentDidAppear`
 
@@ -111,13 +112,13 @@ import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationComponentDidAppear(e => {
+  useNavigationComponentDidAppear((e) => {
     console.log(`${e.componentName} appeared`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationComponentDidAppear(
-    e => {
+    (e) => {
       console.log(`${e.componentName} appeared`)
     },
     { componentId }
@@ -125,7 +126,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationComponentDidAppear(
-    e => {
+    (e) => {
       console.log(`${e.componentName} appeared`)
     },
     { global: true }
@@ -144,13 +145,13 @@ import { useNavigationComponentDidDisappear } from 'react-native-navigation-hook
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationComponentDidDisappear(e => {
+  useNavigationComponentDidDisappear((e) => {
     console.log(`${e.componentName} appeared`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationComponentDidDisappear(
-    e => {
+    (e) => {
       console.log(`${e.componentName} appeared`)
     },
     { componentId }
@@ -158,7 +159,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationComponentDidDisappear(
-    e => {
+    (e) => {
       console.log(`${e.componentName} appeared`)
     },
     { global: true }
@@ -221,13 +222,13 @@ import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-ho
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationModalAttemptedToDismiss(e => {
+  useNavigationModalAttemptedToDismiss((e) => {
     console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationModalAttemptedToDismiss(
-    e => {
+    (e) => {
       console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
     },
     { componentId }
@@ -235,7 +236,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationModalAttemptedToDismiss(
-    e => {
+    (e) => {
       console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
     },
     { global: true }
@@ -254,13 +255,13 @@ import { useNavigationModalDismiss } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationModalDismiss(e => {
+  useNavigationModalDismiss((e) => {
     console.log(`Modals dismissed: ${e.modalsDismissed} on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationModalDismiss(
-    e => {
+    (e) => {
       console.log(`Modals dismissed: ${e.modalsDismissed} on componentId: ${e.componentId}`)
     },
     { componentId }
@@ -268,7 +269,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationModalDismiss(
-    e => {
+    (e) => {
       console.log(`Modals dismissed: ${e.modalsDismissed} on componentId: ${e.componentId}`)
     },
     { global: true }
@@ -287,13 +288,13 @@ import { useNavigationScreenPop } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationScreenPop(e => {
+  useNavigationScreenPop((e) => {
     console.log(`Screen was popped on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationScreenPop(
-    e => {
+    (e) => {
       console.log(`Screen was popped on componentId: ${e.componentId}`)
     },
     { componentId }
@@ -301,7 +302,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationScreenPop(
-    e => {
+    (e) => {
       console.log(`Screen was popped on componentId: ${e.componentId}`)
     },
     { global: true }
@@ -320,7 +321,7 @@ import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Global listener
-  useNavigationBottomTabSelect(e => {
+  useNavigationBottomTabSelect((e) => {
     console.log(`Selected tab id ${e.selectedTabIndex}, unselected tab id ${e.unselectedTabIndex}`)
   })
 
@@ -337,7 +338,7 @@ import { useNavigationBottomTabPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Global listener
-  useNavigationBottomTabPress(e => {
+  useNavigationBottomTabPress((e) => {
     console.log(`Selected tab id ${e.tabIndex}`)
   })
 
@@ -354,7 +355,7 @@ import { useNavigationBottomTabLongPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Global listener
-  useNavigationBottomTabLongPress(e => {
+  useNavigationBottomTabLongPress((e) => {
     console.log(`Selected tab id ${e.selectedTabIndex}`)
   })
 
@@ -371,13 +372,13 @@ import { useNavigationButtonPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen and all buttons when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationButtonPress(e => {
+  useNavigationButtonPress((e) => {
     console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
   })
 
   // Listen events only for this screen and all buttons by providing componentId as paramenter
   useNavigationButtonPress(
-    e => {
+    (e) => {
       console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
     },
     { componentId }
@@ -385,7 +386,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationButtonPress(
-    e => {
+    (e) => {
       console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
     },
     { global: true }
@@ -393,7 +394,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Listen events only for this screen and a specifi buttonc by providing componentId and button as options
   useNavigationButtonPress(
-    e => {
+    (e) => {
       console.log('Pressed profile button on this screen!')
     },
     { componentId, buttonId: 'profileButton' }
@@ -412,13 +413,13 @@ import { useNavigationSearchBarUpdate } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationSearchBarUpdate(e => {
+  useNavigationSearchBarUpdate((e) => {
     console.log(`Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on this screen`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationSearchBarUpdate(
-    e => {
+    (e) => {
       console.log(`Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on this screen`)
     },
     { componentId }
@@ -426,7 +427,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationSearchBarUpdate(
-    e => {
+    (e) => {
       console.log(
         `Seach bar text changed to ${e.text}${e.focussed ? ' (focussed)' : ''} on componentId: ${e.componentId}`
       )
@@ -447,13 +448,13 @@ import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationSearchBarCancelPress(e => {
+  useNavigationSearchBarCancelPress((e) => {
     console.log('Seach bar cancel button pressed on this screen')
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationSearchBarCancelPress(
-    e => {
+    (e) => {
       console.log('Seach bar cancel button pressed on this screen')
     },
     { componentId }
@@ -461,7 +462,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationSearchBarCancelPress(
-    e => {
+    (e) => {
       console.log(`Seach bar cancel button pressed on componentName: ${e.componentName}`)
     },
     { global: true }
@@ -480,13 +481,13 @@ import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   // Listen events only for this screen when using withNavigation HOC or <NavigationProvider> (if neither of those are provided it will warn you at least you provide a `{ global: true}` option)
-  useNavigationPreviewComplete(e => {
+  useNavigationPreviewComplete((e) => {
     console.log(`Preview component ${e.previewComponentId} shown on this screen`)
   })
 
   // Listen events only for this screen by providing componentId as paramenter
   useNavigationPreviewComplete(
-    e => {
+    (e) => {
       console.log(`Preview component ${e.previewComponentId} shown on this screen`)
     },
     { componentId }
@@ -494,7 +495,7 @@ const ScreenComponent = ({ componentId }) => {
 
   // Global event handler. You should probably never use this but just in case.
   useNavigationPreviewComplete(
-    e => {
+    (e) => {
       console.log(`Preview component ${e.previewComponentId} shown on ${e.componentId}`)
     },
     { global: true }
@@ -503,6 +504,32 @@ const ScreenComponent = ({ componentId }) => {
   return <Text>Screen Component</Text>
 }
 ```
+
+## Helpers
+
+### `createLayout`
+
+A helper function to generate a `Layout` object shape
+
+```ts
+function createStack<P = {}>(name: string, passProps?: P, options?: Options): Layout
+```
+
+Checkout the tests [here](./src/helpers/createLayout.test.ts)
+
+### `createStack`
+
+An overlodaded helper function to generate a `LayoutStack` object shape
+
+```ts
+function createStack(layoutStackChildren: LayoutStackChildren, id?: string, options?: Options): LayoutStack
+function createStack(layoutStackChildrenArray: LayoutStackChildren[], id?: string, options?: Options): LayoutStack
+function createStack(name: string): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P, options?: Options): LayoutStack
+```
+
+Checkout the tests [here](./src/helpers/createStack.test.ts)
 
 ## Suggestions
 
@@ -515,7 +542,7 @@ import { useNavigationButtonPress } from 'react-native-navigation-hooks'
 
 const ScreenComponent = ({ componentId }) => {
   const handler = useCallback(
-    e => {
+    (e) => {
       console.log(`Parameter: ${parameter}`)
     },
     [paramenter]

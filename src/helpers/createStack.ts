@@ -5,12 +5,12 @@ import createLayout from './createLayout'
  * Creates navigation LayoutStack exposing multiple function types for the same function as a list of overloads.
  * [more info](https://wix.github.io/react-native-navigation/api/layout-stack)
  */
-function createModalStack(layoutStackChildren: LayoutStackChildren, id?: string, options?: Options): LayoutStack
-function createModalStack(layoutStackChildrenArray: LayoutStackChildren[], id?: string, options?: Options): LayoutStack
-function createModalStack(name: string): LayoutStack
-function createModalStack<P = {}>(name: string, passProps?: P): LayoutStack
-function createModalStack<P = {}>(name: string, passProps?: P, options?: Options): LayoutStack
-function createModalStack<P = {}>(
+function createStack(layoutStackChildren: LayoutStackChildren, id?: string, options?: Options): LayoutStack
+function createStack(layoutStackChildrenArray: LayoutStackChildren[], id?: string, options?: Options): LayoutStack
+function createStack(name: string): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P, options?: Options): LayoutStack
+function createStack<P = {}>(
   nameOrLayoutStackChildren: string | LayoutStackChildren | LayoutStackChildren[],
   passPropsOrId?: P | string,
   options?: Options
@@ -37,4 +37,4 @@ function createModalStack<P = {}>(
   return { id, children: layoutStackChildren, options: stackOptions }
 }
 
-export default createModalStack
+export default createStack
