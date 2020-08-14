@@ -1,3 +1,16 @@
+# [6.1.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.2...v6.1.0) (2020-08-14)
+
+
+### Features
+
+* **context:** export modules ([cb1172a](https://github.com/underscopeio/react-native-navigation-hooks/commit/cb1172acf3356f3fb0c4b13d4c8f62f5afba4218))
+* **docs:** apply PR feedback ([0eb2812](https://github.com/underscopeio/react-native-navigation-hooks/commit/0eb2812117965941ade082a6b7300f236054a207))
+* **helpers:** improve navigation helpers ([2b6ea18](https://github.com/underscopeio/react-native-navigation-hooks/commit/2b6ea18aa93ebf81862b983ee00fd4fc30416169))
+* **hooks:** Apply PR feedback ([ec61e6d](https://github.com/underscopeio/react-native-navigation-hooks/commit/ec61e6d7a0b372737483b4c295b51a9285c8b720))
+* **hooks:** implement useNavigation hook ([d899d63](https://github.com/underscopeio/react-native-navigation-hooks/commit/d899d630da445e4b8119f816b30ec99afcc5b3d7))
+* **hooks:** improve event handler hooks: ([d6ca420](https://github.com/underscopeio/react-native-navigation-hooks/commit/d6ca420ae64ffbb2418e59b4d889a130e665480e))
+* **hooks:** rename createStack methods ([6878059](https://github.com/underscopeio/react-native-navigation-hooks/commit/6878059613b372857ac5847e1b4b4fa78ba361b8))
+
 ## [6.0.2](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.1...v6.0.2) (2020-05-19)
 
 
