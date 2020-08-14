@@ -15,12 +15,7 @@ module.exports = {
         src: 'img/underscope-logo.png',
       },
       items: [
-        {
-          to: 'docs/installing',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
-        },
+        { to: 'docs/before-you-start', label: 'Docs', position: 'left', activeBasePath: 'docs' },
         {
           href: 'https://github.com/underscopeio/react-native-navigation-hooks',
           label: 'GitHub',
