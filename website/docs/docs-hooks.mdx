@@ -22,11 +22,11 @@ Then in your component just need to import **useNavigation** to obtain the navig
 import { useNavigation } from 'react-native-navigation-hooks'
 
 const MyScreen = () => {
-  const { showModal } = useNavigation()
+  const { push } = useNavigation()
 
-  const handleShowModalPress = () => showModal('ModalScreen')
+  const handleNextPress = () => push('NextScreen')
 
-  return <Text onPress={handleShowModalPress}>Show Modal</Text>
+  return <Text onPress={handleNextPress}>Go to the NextScreen</Text>
 }
 ```
 
@@ -36,20 +36,15 @@ const MyScreen = () => {
 import { Navigation } from 'react-native-navigation'
 
 const MyScreen = ({ componentId }) => {
-  const handleShowModalPress = () =>
-    Navigation.showModal({
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'ModalScreen',
-            },
-          },
-        ],
+  const handleNextPress = () => {
+    Navigation.push(componentId, {
+      component: {
+        name: 'NextScreen',
       },
     })
+  }
 
-  return <Text onPress={handleShowModalPress}>Show Modal</Text>
+  return <Text onPress={handleNextPress}>Go to the NextScreen</Text>
 }
 ```
 
