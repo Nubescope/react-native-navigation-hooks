@@ -1,0 +1,81 @@
+---
+id: helpers
+title: Helpers
+sidebar_label: Helpers
+---
+
+### `createNavigationCommands`
+
+A set of overloaded methods which reduce the boilerplate required to execute common navigation commands.
+
+```ts
+interface SetRootCommand {
+  (layoutRoot: LayoutRoot): Promise<any>
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+
+interface SetStackRootCommand {
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+
+interface PushCommand {
+  <P = {}>(layout: Layout<P>): Promise<any>
+  (name: string): Promise<any>
+  <P = {}>(name: string, passProps?: P): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+
+interface ShowModalCommand {
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+
+interface ShowOverlayCommand {
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+
+export type NavigationCommands = {
+  setRoot: SetRootCommand
+  setStackRoot: SetStackRootCommand
+  push: PushCommand
+  showModal: ShowModalCommand
+  showOverlay: ShowOverlayCommand
+  mergeOptions: (options: Options) => void
+  updateProps: (props: object) => void
+  dismissModal: (mergeOptions?: Options) => Promise<any>
+  pop: (mergeOptions?: Options) => Promise<any>
+  popTo: (mergeOptions?: Options) => Promise<any>
+  popToRoot: (mergeOptions?: Options) => Promise<any>
+  dismissOverlay: () => Promise<any>
+  setDefaultOptions: (options: Options) => void
+  dismissAllModals: (mergeOptions?: Options) => Promise<any>
+  getLaunchArgs: () => Promise<any>
+}
+```
+
+### `createLayout`
+
+A helper function to generate a `Layout` object shape.
+
+```ts
+function createLayout<P = {}>(name: string, passProps?: P, options?: Options): Layout
+```
+
+Checkout the tests [here](./src/helpers/createLayout.test.ts)
+
+### `createStack`
+
+An overloaded helper function to generate a `LayoutStack` object shape.
+
+```ts
+function createStack(layoutStackChildren: LayoutStackChildren, id?: string, options?: Options): LayoutStack
+function createStack(layoutStackChildrenArray: LayoutStackChildren[], id?: string, options?: Options): LayoutStack
+function createStack(name: string): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P): LayoutStack
+function createStack<P = {}>(name: string, passProps?: P, options?: Options): LayoutStack
+```
+
+Checkout the tests [here](./src/helpers/createStack.test.ts)
