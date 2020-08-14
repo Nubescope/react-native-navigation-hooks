@@ -84,6 +84,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - gh-pages
   release:
     jobs:
       - release:
