@@ -1,0 +1,24 @@
+---
+id: suggestions
+title: Suggestions
+sidebar_label: Suggestions
+---
+
+## Memoize your handlers
+
+You can take advantage of the [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) hook to memoize your handlers.
+
+```tsx
+import { useNavigationButtonPress } from 'react-native-navigation-hooks'
+
+const ScreenComponent = ({ componentId }) => {
+  const handler = useCallback(
+    (e) => {
+      co    nsole.log(`Parameter: ${parameter}`)
+    },
+    [paramenter]
+  )
+
+  useNavigationButtonPress(handler, { componentId, buttonId: 'profileButton' })
+}
+```

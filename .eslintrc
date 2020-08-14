@@ -1,19 +1,16 @@
 {
-  "parser": "babel-eslint",
-  "env": {
-    "node": true,
-    "jest": true,
-    "jasmine": true
-  },
-  "plugins": ["react", "react-hooks", "prettier"],
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  },
+  "root": true,
+  "extends": ["@react-native-community", "prettier"],
+  "plugins": ["react-native"],
   "settings": {
     "react": {
-      "version": "latest"
+      "version": ">=16.9.0"
+    },
+    "import/ignore": ["react-native"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"]
+      }
     }
   }
 }
