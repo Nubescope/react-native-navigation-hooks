@@ -1,0 +1,43 @@
+---
+id: use-navigation-command-complete
+title: useNavigationCommandComplete
+sidebar_label: useNavigationCommandComplete
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationCommandComplete`
+
+Invoked when a command finishes executing in native. If the command contains animations, for example pushed screen animation,) the listener is invoked after the animation ends. [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
+
+:::caution GLOBAL EVENT HANDLER
+Eventhough you can filter events by `componentName` this hook does not filter them by `componentId` which means that it will be triggered in every mounted screen.
+:::
+
+### Examples
+
+<samp id="use-navigation-command-complete" />
+
+```tsx
+import { useNavigationCommandComplete } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  // Listening all the navigation command events
+  useNavigationCommandComplete(({ commandId, commandName, completionTime, params }) => {
+    console.log(`Command ${name} (${commandId}) invocation finished`)
+  })
+
+  // Filtering navigation command events by commandName
+  useNavigationCommandComplete(({ commandId, commandName, completionTime, params }) => {
+    console.log(`Command ${name} (${commandId}) invocation finished`)
+  }, 'commandName')
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationCommandComplete(handler: (event: CommandCompletedEvent) => any, commandName?: string): void`

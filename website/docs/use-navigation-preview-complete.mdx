@@ -1,0 +1,76 @@
+---
+id: use-navigation-search-bar-update
+title: useNavigationPreviewComplete
+sidebar_label: useNavigationPreviewComplete
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationPreviewComplete (iOS 11+ only)`
+
+Called when preview peek is completed. [more info](https://wix.github.io/react-native-navigation/api/events/#previewcompleted-ios-114-only)
+
+### Examples
+
+#### Using Navigation Context
+
+<samp id="use-navigation-search-bar-update-using-navigation-context" />
+
+```tsx
+import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  // Listen events only for this screen if screen was wrapped with NavigationProvider
+  useNavigationPreviewComplete((e) => {
+    console.log(`Preview component ${e.previewComponentId} shown on this screen`)
+  })
+
+  return <Text>Example Screen</Text>
+}
+```
+
+:::caution Provide a Navigation Context
+If your screen wasn't wrapped with the [NavigationProvider](contexts#navigationprovider) nor using the [withNavigationProvider](hocs#withnavigationproviders) HOC it will `console.warn` you about it!
+:::
+
+#### Manually
+
+<samp id="use-navigation-search-bar-update-without-navigation-context" />
+
+```tsx
+import { useNavigationPreviewComplete } from 'react-native-navigation-hooks'
+
+const ExampleScreen = ({ componentId }) => {
+  // Listen events only for this screen by providing componentId as paramenter
+  useNavigationPreviewComplete(
+    (e) => {
+      console.log(`Preview component ${e.previewComponentId} shown on ${e.componentId}`)
+    },
+    { global: true }
+  )
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) => any, options: Options): void`
+
+`useNavigationPreviewComplete(handler: (event: PreviewCompletedEvent) => any, componentId?: string): void`
+
+#### Types
+
+`Options: { componentId?: string, global?: boolean }`
+
+#### Options
+
+`componentId?: string`
+
+Filters the event from being triggered on every mounted screen but rather the one you've hooked with the event.
+
+`global?: boolean`
+
+Disables the `console.warn` for the cases you don't provide a `componentId` through options nor context. In case you want to handle events globally for doing stuff like tracking/logging we encourage you to use the `Navigation.events()` from **React Native Navigation**

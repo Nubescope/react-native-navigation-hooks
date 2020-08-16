@@ -1,0 +1,68 @@
+---
+id: use-navigation
+title: useNavigation
+sidebar_label: useNavigation
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigation`
+
+Gives you all the `Navigation` commands exposed by **React Native Navigation** enhanced with a set of [handy overloaded methods](helpers#createNavigationCommands) which reduces significantly the boilerplate code making it it much more clean and readable.
+
+On the other hand you will have to provide the `componentId` only once when you declare the hook. Or even better you can forget about it when it is used in conjunction with the [NavigationContext](contexts#NavigationContext) as the hook will do it for you by obtaining the `componentId` from the context. Also this is very useful in certain situations where you wanna access the commands from deeply nested childs.
+
+### Example
+
+:::tip Use Navigation Context
+The example below assumes that the screen was registered and wrapped it with the [NavigationProvider](contexts#navigationprovider) to pass the **componentId** down to the three below so the **useNavigation** hook can read it.
+
+You can either wrap the screen with the [NavigationProvider](contexts#navigationprovider) or take advantage of the [withNavigationProvider](hocs#withnavigationproviders) helper.
+:::
+
+<samp id="use-navigation-example" />
+
+```tsx
+import React from 'react'
+import { Button, View } from 'react-native'
+import { useNavigation } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  const { setStackRoot, pop, push, showOverlay } = useNavigation()
+
+  return (
+    <View>
+      <Button
+        title="Home"
+        onPress={() => {
+          setStackRoot('HomeScreen')
+        }}
+      />
+
+      <Button title="Back" onPress={() => pop()} />
+
+      <Button
+        title="Next Screen"
+        onPress={() => {
+          push('NextScreen', { myProp: 'value' })
+        }}
+      />
+
+      <Button
+        title="showOverlay"
+        onPress={() => {
+          showOverlay('ScreenOveraly')
+        }}
+      />
+    </View>
+  )
+}
+```
+
+---
+
+### Reference
+
+`useNavigation(componentId?: string): NavigationCommands`
+
+> Check [createNavigationCommands](helpers#createnavigationcommands) for more info about the overloaded methods provided.

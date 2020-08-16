@@ -1,0 +1,43 @@
+---
+id: use-navigation-command
+title: useNavigationCommand
+sidebar_label: useNavigationCommand
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationCommand`
+
+Called whenever a Navigation command (i.e push, pop, showModal etc) is invoked. [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandlistener)
+
+:::caution GLOBAL EVENT HANDLER
+Eventhough you can filter events by `componentName` this hook does not filter them by `componentId` which means that it will be triggered in every mounted screen.
+:::
+
+### Examples
+
+<samp id="use-navigation-command" />
+
+```tsx
+import { useNavigationCommand } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  // Listening all the navigation command events
+  useNavigationCommand((commandName, { commandId, layout }) => {
+    console.log(`Command ${commandName} (${commandId}) invoked`)
+  })
+
+  // Filtering navigation command events by commandName
+  useNavigationCommand((commandName, { commandId, layout }) => {
+    console.log(`Command ${commandName} (${commandId}) invoked`)
+  }, 'commandName')
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationCommand(handler: (event: (name: string, params: any)) => any, commandName?: string): void`

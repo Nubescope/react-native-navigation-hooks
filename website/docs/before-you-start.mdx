@@ -1,0 +1,17 @@
+---
+id: before-you-start
+title: Before you start
+sidebar_label: Before you start
+---
+
+## Dependent Libraries
+
+**React Native Navigation Hooks** is a module, dependent on and intended to be used alongside [React Native](https://github.com/facebook/react-native) and [React Native Navigation](https://github.com/wix/react-native-navigation), so some experience with it and knowledge of core concepts is required. If you feel the need, you can start with their [getting started](https://wix.github.io/react-native-navigation/docs/before-you-start/) page, and then come back here when you're ready.
+
+If you want to dig right into it, start with [installing](installing) the library. If you're just looking around, we suggest checking out [API Reference](use-navigation) first.
+
+## The NavigationContext
+
+Every hook in this library uses the `componentId` required by **React Native Navigation** to execute most of the navigation commands but also to filter the event handlers from being triggered on every mounted screen but rather the one you have hooked to a specific navigation event.
+
+We engourage you to wrap your screen components using either [withNavigationProvider](hocs#withnavigationproviders) or [NavigationProvider](contexts#navigationprovider). By doing this you won't need to provide the `componentId` manually on every hook invocation as hooks will do it for you by cosuming it from the [NavigationContext](contexts#navigationcontext).

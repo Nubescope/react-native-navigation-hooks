@@ -1,0 +1,37 @@
+---
+id: use-navigation-bottom-tab-select
+title: useNavigationBottomTabSelect
+sidebar_label: useNavigationBottomTabSelect
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationBottomTabSelect`
+
+Invoked when a BottomTab is selected by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabselectedlistener)
+
+:::caution GLOBAL EVENT HANDLER
+This hook does not filter them by `componentId` which means that it will be triggered in every mounted screen.
+:::
+
+### Examples
+
+<samp id="use-navigation-bottom-tab-select" />
+
+```tsx
+import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  useNavigationBottomTabSelect((e) => {
+    console.log(`Selected tab id ${e.selectedTabIndex}, unselected tab id ${e.unselectedTabIndex}`)
+  })
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationBottomTabSelect(handler: (event: BottomTabSelectedEvent) => any, commandName?: string): void`

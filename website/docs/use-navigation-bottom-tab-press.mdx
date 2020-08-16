@@ -1,0 +1,37 @@
+---
+id: use-navigation-bottom-tab-press
+title: useNavigationBottomTabPress
+sidebar_label: useNavigationBottomTabPress
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationBottomTabPress`
+
+Invoked when a BottomTab is pressed by the user. [more info](https://wix.github.io/react-native-navigation/api/events/#registerbottomtabpressedlistener)
+
+:::caution GLOBAL EVENT HANDLER
+This hook does not filter them by `componentId` which means that it will be triggered in every mounted screen.
+:::
+
+### Examples
+
+<samp id="use-navigation-bottom-tab-press" />
+
+```tsx
+import { useNavigationBottomTabPress } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  useNavigationBottomTabPress((e) => {
+    console.log(`Selected tab id ${e.tabIndex}`)
+  })
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationBottomTabPress(handler: (event: BottomTabPressedEvent) => any, commandName?: string): void`

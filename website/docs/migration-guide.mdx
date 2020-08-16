@@ -1,0 +1,49 @@
+---
+id: migration-guide
+title: Migration Guide
+sidebar_label: Migration Guide
+---
+
+## From `6.0.2` to `>=6.1.0`
+
+### Global event handler warnings introduced
+
+Even though in this new version we didn't break compatibility, we have decided to display a warning suggesting that probably you don't want to handle global events in a particular screen. Anyway as you'll see below you can use the `global` option at your own risk.
+
+### Hooks for navigation event handlers
+
+Interfaces were updated to receive a handler as the first parameter (same as in the previous version) but the second one is now an options object.
+
+This object includes the following base fields:
+
+- `componentId`: To trigger the event only if on the given **componentId**.
+- `global` (default: false): Prevent the global event handler warning to being shown.
+
+Some of them also allows you to specify particular fields to filter certain events like the `buttonId` used by the `useNavigationButtonPress` hook.
+
+#### Before
+
+```tsx
+  useNavigationButtonPress(
+    (e) => {
+      console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
+    },
+    'componentId',
+    'buttonId,
+  )
+```
+
+#### After
+
+```tsx
+useNavigationButtonPress(
+  (e) => {
+    console.log(`Pressed ${e.buttonId} on componentId: ${e.componentId}`)
+  },
+  { componentId: 'componentId', buttonId: 'buttonId' }
+)
+```
+
+:::tip Use Navigation Context
+You can avoid the **componentId** parameter if you're using the [withNavigationProvider](hocs#withnavigationproviders) or [NavigationProvider](contexts#navigationprovider)
+:::

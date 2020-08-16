@@ -1,0 +1,76 @@
+---
+id: use-navigation-modal-attempted-to-dismiss
+title: useNavigationModalAttemptedToDismiss
+sidebar_label: useNavigationModalAttemptedToDismiss
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationModalAttemptedToDismiss`
+
+Invoked only on iOS pageSheet modal when swipeToDismiss flag is set to true and modal swiped down to dismiss. [more info](https://wix.github.io/react-native-navigation/api/events/#registermodalattemptedtodismisslistenerios-13-only)
+
+### Examples
+
+#### Using Navigation Context
+
+<samp id="use-navigation-modal-attempted-to-dismiss-using-navigation-context" />
+
+```tsx
+import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  // Listen events only for this screen if screen was wrapped with NavigationProvider
+  useNavigationModalAttemptedToDismiss((e) => {
+    console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
+  })
+
+  return <Text>Example Screen</Text>
+}
+```
+
+:::caution Provide a Navigation Context
+If your screen wasn't wrapped with the [NavigationProvider](contexts#navigationprovider) nor using the [withNavigationProvider](hocs#withnavigationproviders) HOC it will `console.warn` you about it!
+:::
+
+#### Manually
+
+<samp id="use-navigation-modal-attempted-to-dismiss-without-navigation-context" />
+
+```tsx
+import { useNavigationModalAttemptedToDismiss } from 'react-native-navigation-hooks'
+
+const ExampleScreen = ({ componentId }) => {
+  // Listen events only for this screen by providing componentId as paramenter
+  useNavigationModalAttemptedToDismiss(
+    (e) => {
+      console.log(`Modal attempted dismissed on componentId: ${e.componentId}`)
+    },
+    { componentId }
+  )
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationModalAttemptedToDismiss(handler: (event: ModalAttemptedToDismissEvent) => any, options: Options): void`
+
+`useNavigationModalAttemptedToDismiss(handler: (event: ModalAttemptedToDismissEvent) => any, componentId?: string): void`
+
+#### Types
+
+`Options: { componentId?: string, global?: boolean }`
+
+#### Options
+
+`componentId?: string`
+
+Filters the event from being triggered on every mounted screen but rather the one you've hooked with the event.
+
+`global?: boolean`
+
+Disables the `console.warn` for the cases you don't provide a `componentId` through options nor context. In case you want to handle events globally for doing stuff like tracking/logging we encourage you to use the `Navigation.events()` from **React Native Navigation**

@@ -1,0 +1,20 @@
+---
+id: hocs
+title: Higher Order Components
+sidebar_label: Higher Order Components
+hide_table_of_contents: true
+---
+
+## `withNavigationProvider`
+
+Creates a higher-order React component class that wraps your component with the [NavigationProvider](contexts#NavigationProvider) and sets the provider value with **React Native Navigation** injected props like `componentId`.
+
+```tsx
+import { Navigation } from 'react-native-navigation'
+import { withNavigationProvider, NavigationProvider } from 'react-native-navigation-hooks'
+import { MyScreenComponent } from '~/screens/MyScreenComponent'
+
+Navigation.registerComponent('MyScreenComponent', () => {
+  return withNavigationProvider(MyScreenComponent)
+})
+```

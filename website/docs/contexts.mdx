@@ -1,0 +1,65 @@
+---
+id: contexts
+title: Contexts
+sidebar_label: Contexts
+---
+
+## NavigationContext
+
+The main purpose of this context is to hold the `componentId` value injected by **React Native Navigation** in every registered component making it available to the hooks and/or the any of the deeply nested childs in your component tree.
+
+### `NavigationProvider`
+
+The following example shows how to wrap your screen components when you are registering them.
+
+```tsx
+import React from 'react'
+import { Navigation } from 'react-native-navigation'
+import { NavigationProvider } from 'react-native-navigation-hooks'
+import { MyScreenComponent } from '~/screens'
+
+Navigation.registerComponent(
+  'MyScreenComponent',
+  () => (props) => {
+    return (
+      <NavigationProvider value={{ componentId: props.componentId }}>
+        <MyScreenComponent {...props} />
+      </NavigationProvider>>
+    )
+  },
+  () => MyScreenComponent
+)
+```
+
+### `NavigationConsumer`
+
+The following example shows how to access the `componentId` value from a deeply nested component.
+
+```tsx
+import React from 'react'
+import { Text } from 'react-native'
+import { NavigationConsumer } from 'react-native-navigation-hooks'
+
+const MyComponent = () => {
+  return (
+    <NavigationConsumer>
+      {({ componentId }) => {
+        return <Text>{componentId}</Text>
+      }}
+    </NavigationConsumer>
+  )
+}
+```
+
+You can also use React's `useContext` hook to access navigation context values.
+
+```tsx
+import React, { useContext } from 'react'
+import { NavigationContext } from 'react-native-navigation-hooks'
+
+const MyComponent = () => {
+  const { componentId } = useContext(NavigationContext)
+
+  // ...
+}
+```

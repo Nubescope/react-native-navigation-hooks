@@ -1,0 +1,76 @@
+---
+id: use-navigation-search-bar-cancel-press
+title: useNavigationSearchBarCancelPress
+sidebar_label: useNavigationSearchBarCancelPress
+hide_title: true
+hide_table_of_contents: true
+---
+
+## `useNavigationSearchBarCancelPress (iOS 11+ only)`
+
+Called when the cancel button on the SearchBar from NavigationBar gets pressed. [more info](https://wix.github.io/react-native-navigation/api/events/#searchbarcancelpressed-ios-11-only)
+
+### Examples
+
+#### Using Navigation Context
+
+<samp id="use-navigation-search-bar-cancel-press-using-navigation-context" />
+
+```tsx
+import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks'
+
+const ExampleScreen = () => {
+  // Listen events only for this screen if screen was wrapped with NavigationProvider
+  useNavigationSearchBarCancelPress((e) => {
+    console.log('Seach bar cancel button pressed on this screen')
+  })
+
+  return <Text>Example Screen</Text>
+}
+```
+
+:::caution Provide a Navigation Context
+If your screen wasn't wrapped with the [NavigationProvider](contexts#navigationprovider) nor using the [withNavigationProvider](hocs#withnavigationproviders) HOC it will `console.warn` you about it!
+:::
+
+#### Manually
+
+<samp id="use-navigation-search-bar-cancel-press-without-navigation-context" />
+
+```tsx
+import { useNavigationSearchBarCancelPress } from 'react-native-navigation-hooks'
+
+const ExampleScreen = ({ componentId }) => {
+  // Listen events only for this screen by providing componentId as paramenter
+  useNavigationSearchBarCancelPress(
+    (e) => {
+      console.log('Seach bar cancel button pressed on this screen')
+    },
+    { componentId }
+  )
+
+  return <Text>Example Screen</Text>
+}
+```
+
+### Reference
+
+#### Methods
+
+`useNavigationSearchBarCancelPress(handler: (event: SearchBarCancelPressedEvent) => any, options: Options): void`
+
+`useNavigationSearchBarCancelPress(handler: (event: SearchBarCancelPressedEvent) => any, componentId?: string): void`
+
+#### Types
+
+`Options: { componentId?: string, global?: boolean }`
+
+#### Options
+
+`componentId?: string`
+
+Filters the event from being triggered on every mounted screen but rather the one you've hooked with the event.
+
+`global?: boolean`
+
+Disables the `console.warn` for the cases you don't provide a `componentId` through options nor context. In case you want to handle events globally for doing stuff like tracking/logging we encourage you to use the `Navigation.events()` from **React Native Navigation**

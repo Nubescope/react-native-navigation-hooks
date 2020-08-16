@@ -8,6 +8,7 @@ module.exports = {
   organizationName: 'underscopeio',
   projectName: 'react-native-navigation-hooks',
   themeConfig: {
+    sidebarCollapsible: false,
     navbar: {
       title: 'React Native Navigation Hooks',
       logo: {
@@ -15,7 +16,12 @@ module.exports = {
         src: 'img/underscope-logo.png',
       },
       items: [
-        { to: 'docs/before-you-start', label: 'Docs', position: 'left', activeBasePath: 'docs' },
+        {
+          to: 'docs/before-you-start',
+          label: 'Docs',
+          position: 'left',
+          activeBasePath: 'docs',
+        },
         {
           href: 'https://github.com/underscopeio/react-native-navigation-hooks',
           label: 'GitHub',
