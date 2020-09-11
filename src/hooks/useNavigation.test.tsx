@@ -41,6 +41,23 @@ describe('useNavigation', () => {
     expect(result.error).toBeUndefined()
   })
 
+  it('should return helpers taking precedence componentId over CompoenentIdProvider', () => {
+    jest.spyOn(createNavigationCommands, 'default')
+
+    const wrapper = ({ children }) => (
+      <NavigationProvider value={{ componentId: 'componentId' }}>{children}</NavigationProvider>
+    )
+
+    const { result, unmount } = renderHook(() => useNavigation('componentIdArgument'), { wrapper })
+
+    unmount()
+
+    expect(createNavigationCommands.default).toHaveBeenCalledWith('componentIdArgument')
+
+    expect(Object.keys(result.current)).toEqual(navigationCommandKeys)
+    expect(result.error).toBeUndefined()
+  })
+
   it('should throw when not using NavigationProvider nor componentId as argument', () => {
     const { result, unmount } = renderHook(() => useNavigation())
 
