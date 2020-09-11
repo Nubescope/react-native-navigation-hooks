@@ -17,7 +17,9 @@ const useNavigation = (
    */
   componentId?: string
 ) => {
-  const { componentId: id = componentId } = useContext(NavigationContext)
+  const { componentId: contextComponentId } = useContext(NavigationContext)
+
+  const id = componentId || contextComponentId
 
   if (!id) {
     throw new Error('Missing "componentId". Use NavigationContext or pass "componentId" as argument.')
