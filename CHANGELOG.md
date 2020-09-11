@@ -1,3 +1,10 @@
+## [6.1.1](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.1.0...v6.1.1) (2020-09-11)
+
+
+### Bug Fixes
+
+* **hooks:** fix args precedence in useNavigation ([7157fa9](https://github.com/underscopeio/react-native-navigation-hooks/commit/7157fa9c19c4f3764546d94e689834a074fb220d))
+
 # [6.1.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.0.2...v6.1.0) (2020-08-14)
 
 
