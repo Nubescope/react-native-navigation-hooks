@@ -8,7 +8,7 @@ interface SetRootCommand {
 }
 
 interface SetStackRootCommand {
-  (layout: Layout): Promise<any>
+  <P = {}>(layout: Layout<P> | Layout<P>[]): Promise<any>
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
 }
 
