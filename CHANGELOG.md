@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.1.1...v6.2.0) (2020-09-17)
+
+
+### Features
+
+* **hooks:** add missing type to setStackRoot ([4e9141b](https://github.com/underscopeio/react-native-navigation-hooks/commit/4e9141b99356ae406e1c19da0a4a9256d53698fa))
+
 ## [6.1.1](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.1.0...v6.1.1) (2020-09-11)
 
 
