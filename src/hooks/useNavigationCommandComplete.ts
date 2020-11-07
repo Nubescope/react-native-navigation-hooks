@@ -4,7 +4,7 @@ import { Navigation, CommandCompletedEvent } from 'react-native-navigation'
 /**
  * Registers listener to be called when a command finishes executing in native. If the command contains
  * animations, for example pushed screen animation) the listener is invoked after the animation ends.
- * [more info]https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
+ * [more info](https://wix.github.io/react-native-navigation/api/events/#registercommandcompletedlistener)
  */
 function useNavigationCommandComplete(
   /**
