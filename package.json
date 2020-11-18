@@ -61,7 +61,7 @@
     "react-native": "0.63.2",
     "react-native-navigation": "6.11.0",
     "react-test-renderer": "16.13.1",
-    "semantic-release": "17.1.1",
+    "semantic-release": "17.2.3",
     "typescript": "3.9.7"
   },
   "release": {
