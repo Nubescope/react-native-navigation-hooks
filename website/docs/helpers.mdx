@@ -4,9 +4,9 @@ title: Helpers
 sidebar_label: Helpers
 ---
 
-### `createNavigationCommands`
+### `setRoot`
 
-A set of overloaded methods which reduce the boilerplate required to execute common navigation commands.
+Overloaded method which reduces the boilerplate required for the `setRoot` command.
 
 ```ts
 interface SetRootCommand {
@@ -14,7 +14,35 @@ interface SetRootCommand {
   (layout: Layout): Promise<any>
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
 }
+```
 
+### `showModal`
+
+Overloaded method which reduces the boilerplate required for the `showModal` command.
+
+```ts
+interface ShowModalCommand {
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+```
+
+### `showOverlay`
+
+Overloaded method which reduces the boilerplate required for the `showOverlay` command.
+
+```ts
+interface ShowOverlayCommand {
+  (layout: Layout): Promise<any>
+  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
+}
+```
+
+### `createNavigationCommands`
+
+A set of overloaded methods which reduce the boilerplate required to execute common navigation commands.
+
+```ts
 interface SetStackRootCommand {
   (layout: Layout): Promise<any>
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
@@ -27,22 +55,9 @@ interface PushCommand {
   <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
 }
 
-interface ShowModalCommand {
-  (layout: Layout): Promise<any>
-  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
-}
-
-interface ShowOverlayCommand {
-  (layout: Layout): Promise<any>
-  <P = {}>(name: string, passProps?: P, options?: Options): Promise<any>
-}
-
 export type NavigationCommands = {
-  setRoot: SetRootCommand
   setStackRoot: SetStackRootCommand
   push: PushCommand
-  showModal: ShowModalCommand
-  showOverlay: ShowOverlayCommand
   mergeOptions: (options: Options) => void
   updateProps: (props: object) => void
   dismissModal: (mergeOptions?: Options) => Promise<any>
@@ -50,9 +65,6 @@ export type NavigationCommands = {
   popTo: (mergeOptions?: Options) => Promise<any>
   popToRoot: (mergeOptions?: Options) => Promise<any>
   dismissOverlay: () => Promise<any>
-  setDefaultOptions: (options: Options) => void
-  dismissAllModals: (mergeOptions?: Options) => Promise<any>
-  getLaunchArgs: () => Promise<any>
 }
 ```
 
