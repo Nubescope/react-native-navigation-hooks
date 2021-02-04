@@ -1,3 +1,10 @@
+# [6.3.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.2.0...v6.3.0) (2021-02-04)
+
+
+### Features
+
+* **helpers:** deprecate methods from useNavigation hook ([3fd62e5](https://github.com/underscopeio/react-native-navigation-hooks/commit/3fd62e55331e7346915f33ac3b93e130265eaa61)), closes [#55](https://github.com/underscopeio/react-native-navigation-hooks/issues/55)
+
 # [6.2.0](https://github.com/underscopeio/react-native-navigation-hooks/compare/v6.1.1...v6.2.0) (2020-09-17)
 
 
