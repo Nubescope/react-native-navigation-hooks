@@ -1,13 +1,11 @@
 import { Navigation } from 'react-native-navigation'
 import createNavigationCommands from './createNavigationCommands'
+import { setRoot, showModal, showOverlay } from './'
 
 jest.mock('react-native-navigation', () => ({
   Navigation: {
-    setRoot: jest.fn(),
     setStackRoot: jest.fn(),
     push: jest.fn(),
-    showModal: jest.fn(),
-    showOverlay: jest.fn(),
     mergeOptions: jest.fn(),
     updateProps: jest.fn(),
     dismissModal: jest.fn(),
@@ -21,94 +19,68 @@ jest.mock('react-native-navigation', () => ({
   },
 }))
 
+jest.mock('./setRoot')
+jest.mock('./showModal')
+jest.mock('./showOverlay')
+
 describe('createNavigationCommands', () => {
-  describe('setRoot', () => {
-    const { setRoot } = createNavigationCommands('componentId')
+  describe('setRoot (backward compatibillity)', () => {
+    const { setRoot: setRootCommand } = createNavigationCommands('componentId')
 
-    it('should call Navigation.setRoot using name', async () => {
-      await setRoot('componentName')
+    it('should call setRoot helper with same parameters', async () => {
+      await setRootCommand('componentName')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-          },
-        },
-      })
+      expect(setRoot).toHaveBeenCalledWith('componentName')
     })
+  })
 
-    it('should call Navigation.setRoot using name and passProps', async () => {
-      await setRoot('componentName', { prop1: 'value1' })
+  describe('showModal (backward compatibillity)', () => {
+    const { showModal: showModalCommand } = createNavigationCommands('componentId')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-            passProps: { prop1: 'value1' },
-          },
-        },
-      })
+    it('should call showModal helper with same parameters', async () => {
+      await showModal('componentName')
+
+      expect(showModalCommand).toHaveBeenCalledWith('componentName')
     })
+  })
 
-    it('should call Navigation.setRoot using name, passProps and options', async () => {
-      await setRoot('componentName', { prop1: 'value1' }, { popGesture: true })
+  describe('showOverlay (backward compatibillity)', () => {
+    const { showOverlay: showOverlayCommand } = createNavigationCommands('componentId')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-            passProps: { prop1: 'value1' },
-            options: { popGesture: true },
-          },
-        },
-      })
+    it('should call showOverlay helper with same parameters', async () => {
+      await showOverlay('componentName')
+
+      expect(showOverlayCommand).toHaveBeenCalledWith('componentName')
     })
+  })
 
-    it('should call Navigation.setRoot using name and options', async () => {
-      await setRoot('componentName', undefined, { popGesture: true })
+  describe('setDefaultOptions (backward compatibillity)', () => {
+    const { setDefaultOptions } = createNavigationCommands('componentId')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-            options: { popGesture: true },
-          },
-        },
-      })
+    it('should return Navigation.setDefaultOptions function as is', () => {
+      setDefaultOptions({})
+
+      expect(Navigation.setDefaultOptions).toHaveBeenCalledWith({})
     })
+  })
 
-    it('should call Navigation.setRoot using a Layout', async () => {
-      await setRoot({
-        component: {
-          name: 'componentName',
-        },
-      })
+  describe('getLaunchArgs (backward compatibillity)', () => {
+    const { getLaunchArgs } = createNavigationCommands('componentId')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-          },
-        },
-      })
+    it('should return Navigation.getLaunchArgs function as is', async () => {
+      await getLaunchArgs()
+
+      expect(Navigation.getLaunchArgs).toHaveBeenCalled()
     })
+  })
 
-    it('should call Navigation.setRoot using a LayoutRoot', async () => {
-      await setRoot({
-        root: {
-          component: {
-            name: 'componentName',
-          },
-        },
-      })
+  describe('dismissAllModals (backward compatibillity)', () => {
+    const { dismissAllModals } = createNavigationCommands('componentId')
 
-      expect(Navigation.setRoot).toHaveBeenCalledWith({
-        root: {
-          component: {
-            name: 'componentName',
-          },
-        },
-      })
+    it('should return Navigation.dismissAllModals function as is', async () => {
+      await dismissAllModals()
+
+      expect(Navigation.dismissAllModals).toHaveBeenCalled()
     })
   })
 
@@ -236,130 +208,6 @@ describe('createNavigationCommands', () => {
     })
   })
 
-  describe('showModal', () => {
-    const { showModal } = createNavigationCommands('componentId')
-
-    it('should call Navigation.showModal using name', async () => {
-      await showModal('componentName')
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name and passProps', async () => {
-      await showModal('componentName', { prop1: 'value1' })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          passProps: { prop1: 'value1' },
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name, passProps and options', async () => {
-      await showModal('componentName', { prop1: 'value1' }, { popGesture: true })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          passProps: { prop1: 'value1' },
-          options: { popGesture: true },
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using name and options', async () => {
-      await showModal('componentName', undefined, { popGesture: true })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          options: { popGesture: true },
-        },
-      })
-    })
-
-    it('should call Navigation.showModal using a Layout', async () => {
-      await showModal({
-        component: {
-          name: 'componentName',
-        },
-      })
-
-      expect(Navigation.showModal).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-        },
-      })
-    })
-  })
-
-  describe('showOverlay', () => {
-    const { showOverlay } = createNavigationCommands('componentId')
-
-    it('should call Navigation.showOverlay using name', async () => {
-      await showOverlay('componentName')
-
-      expect(Navigation.showOverlay).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-        },
-      })
-    })
-
-    it('should call Navigation.showOverlay using name and passProps', async () => {
-      await showOverlay('componentName', { prop1: 'value1' })
-
-      expect(Navigation.showOverlay).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          passProps: { prop1: 'value1' },
-        },
-      })
-    })
-
-    it('should call Navigation.showOverlay using name, passProps and options', async () => {
-      await showOverlay('componentName', { prop1: 'value1' }, { popGesture: true })
-
-      expect(Navigation.showOverlay).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          passProps: { prop1: 'value1' },
-          options: { popGesture: true },
-        },
-      })
-    })
-
-    it('should call Navigation.showOverlay using name and options', async () => {
-      await showOverlay('componentName', undefined, { popGesture: true })
-
-      expect(Navigation.showOverlay).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-          options: { popGesture: true },
-        },
-      })
-    })
-
-    it('should call Navigation.showOverlay using a Layout', async () => {
-      await showOverlay({
-        component: {
-          name: 'componentName',
-        },
-      })
-
-      expect(Navigation.showOverlay).toHaveBeenCalledWith({
-        component: {
-          name: 'componentName',
-        },
-      })
-    })
-  })
-
   describe('mergeOptions', () => {
     const { mergeOptions } = createNavigationCommands('componentId')
 
@@ -422,15 +270,15 @@ describe('createNavigationCommands', () => {
     const { popTo } = createNavigationCommands('componentId')
 
     it('should call Navigation.popTo with componentId', async () => {
-      await popTo()
+      await popTo('targetComponentId')
 
-      expect(Navigation.popTo).toHaveBeenCalledWith('componentId')
+      expect(Navigation.popTo).toHaveBeenCalledWith('targetComponentId')
     })
 
     it('should call Navigation.popTo using componentId and mergeOptions', async () => {
-      await popTo({ popGesture: true })
+      await popTo('targetComponentId', { popGesture: true })
 
-      expect(Navigation.popTo).toHaveBeenCalledWith('componentId', { popGesture: true })
+      expect(Navigation.popTo).toHaveBeenCalledWith('targetComponentId', { popGesture: true })
     })
   })
 
@@ -457,36 +305,6 @@ describe('createNavigationCommands', () => {
       await dismissOverlay()
 
       expect(Navigation.dismissOverlay).toHaveBeenCalledWith('componentId')
-    })
-  })
-
-  describe('events', () => {
-    const { setDefaultOptions } = createNavigationCommands('componentId')
-
-    it('should return Navigation.setDefaultOptions function as is', () => {
-      setDefaultOptions({})
-
-      expect(Navigation.setDefaultOptions).toHaveBeenCalledWith({})
-    })
-  })
-
-  describe('getLaunchArgs', () => {
-    const { getLaunchArgs } = createNavigationCommands('componentId')
-
-    it('should return Navigation.getLaunchArgs function as is', async () => {
-      await getLaunchArgs()
-
-      expect(Navigation.getLaunchArgs).toHaveBeenCalled()
-    })
-  })
-
-  describe('dismissAllModals', () => {
-    const { dismissAllModals } = createNavigationCommands('componentId')
-
-    it('should return Navigation.dismissAllModals function as is', async () => {
-      await dismissAllModals()
-
-      expect(Navigation.dismissAllModals).toHaveBeenCalled()
     })
   })
 })

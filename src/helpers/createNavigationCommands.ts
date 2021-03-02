@@ -19,13 +19,19 @@ interface PushCommand {
 
 export type NavigationCommands = {
   setStackRoot: SetStackRootCommand
+
   push: PushCommand
+
   mergeOptions: (options: Options) => void
+
   updateProps: (props: object) => void
+
   dismissModal: (mergeOptions?: Options) => Promise<any>
+
   pop: (mergeOptions?: Options) => Promise<any>
-  popTo: (mergeOptions?: Options) => Promise<any>
+
   popToRoot: (mergeOptions?: Options) => Promise<any>
+
   dismissOverlay: () => Promise<any>
 
   /**
@@ -42,6 +48,11 @@ export type NavigationCommands = {
    * @deprecated Use showOverlay import from 'react-native-navigation-hooks'
    */
   showOverlay: ShowOverlayCommand
+
+  /**
+   * @deprecated Use Navigation.popTo instead
+   */
+  popTo: (componentId: string, mergeOptions?: Options) => Promise<any>
 
   /**
    * @deprecated Use Navigation.setDefaultOptions instead
@@ -105,7 +116,7 @@ function createNavigationCommands(
   }
 
   // eslint-disable-next-line no-shadow
-  function popTo(mergeOptions?: Options) {
+  function popTo(componentId: string, mergeOptions?: Options) {
     return mergeOptions ? Navigation.popTo(componentId, mergeOptions) : Navigation.popTo(componentId)
   }
 
