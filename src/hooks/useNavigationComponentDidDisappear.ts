@@ -1,4 +1,4 @@
-import { useLayoutEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { Navigation, ComponentDidDisappearEvent } from 'react-native-navigation'
 import { NavigationContext } from '../contexts'
 import triggerIfComponentIdMatches from '../helpers/triggerIfComponentIdMatches'
@@ -51,7 +51,7 @@ function useNavigationComponentDidDisappear(handler: EventHandler, componentIdOr
 
   warnIfMissingComponentId('useNavigationComponentDidDisappear', componentId, global)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const subscription = Navigation.events().registerComponentDidDisappearListener(
       (event: ComponentDidDisappearEvent) => triggerIfComponentIdMatches(handler, event, componentId)
     )
